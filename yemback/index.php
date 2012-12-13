@@ -12,7 +12,7 @@
 		Returns the user ID.
 	2) "sendAnswer" -- params = [INT user_id, INT question_id, INT answer_id]
 		Create a user_has_state entry corresponding to answer
-		Calculate feelings user must have
+		Calculate feelings user must meet
 		Check if the user has enough entry
 		If true, returns a status:end, feelings, animations associated and meats to show
 		Else, returns a status:newQuestion, new Question to ask, feelings, animations associated.
