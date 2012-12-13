@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.25)
 # Database: yem
-# Generation Time: 2012-12-13 22:10:58 +0000
+# Generation Time: 2012-12-13 23:38:04 +0000
 # ************************************************************
 
 
@@ -395,7 +395,7 @@ DROP TABLE IF EXISTS `yem_user_has_state`;
 CREATE TABLE `yem_user_has_state` (
   `idUser` int(11) unsigned NOT NULL DEFAULT '0',
   `idState` int(11) unsigned NOT NULL DEFAULT '0',
-  `importance` int(11) unsigned DEFAULT NULL,
+  `importance` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`idUser`,`idState`),
   KEY `idState` (`idState`),
   CONSTRAINT `yem_user_has_state_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `yem_user` (`id`),
@@ -407,12 +407,12 @@ LOCK TABLES `yem_user_has_state` WRITE;
 
 INSERT INTO `yem_user_has_state` (`idUser`, `idState`, `importance`)
 VALUES
-	(1,5,2),
-	(1,6,4),
-	(2,2,1),
-	(2,3,3),
-	(3,2,4),
-	(3,7,1);
+	(1,5,7),
+	(1,6,9),
+	(2,2,6),
+	(2,3,8),
+	(3,2,9),
+	(3,7,6);
 
 /*!40000 ALTER TABLE `yem_user_has_state` ENABLE KEYS */;
 UNLOCK TABLES;
