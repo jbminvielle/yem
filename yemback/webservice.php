@@ -13,16 +13,31 @@ if(!function_exists('action_'.$_GET['service']))  {
 	echo '<h1>Error 404</h1><p>Webservice '.$_GET['service'].' not found.</p>';
 }
 else {
-	$return = call_user_func('action_'.$_GET['service'], $data); 
-	echo $return;
+	$return = call_user_func('action_'.$_GET['service'], $data);
+	if($return !== false) echo $return;
+	else { //error !
+		header("HTTP/1.0 500");
+		echo '<h1>Error 500</h1><p>Webservice '.$_GET['service'].' responded with an error.</p>';	
+	}
 }
 
 
 // webservices functions :
 
 function action_createUser($array) {
+	openSQLBase();
+
+	if(!isset($array['name'])) return false;
 	// Creates a user in data
+	mysql_query('INSERT INTO yem_user (name) VALUES ("'.$array['name'].'")');
+
 	// Returns the user ID
+	$id = mysql_insert_id();
+
+	mysql_close();
+
+	if($id === 0) return false;
+	else return $id;
 }
 
 function action_sendAnswer($array) {
