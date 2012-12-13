@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.25)
 # Database: yem
-# Generation Time: 2012-12-13 20:47:14 +0000
+# Generation Time: 2012-12-13 22:10:58 +0000
 # ************************************************************
 
 
@@ -97,33 +97,6 @@ VALUES
 	(4,7);
 
 /*!40000 ALTER TABLE `yem_answer_informs_about_state` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table yem_state_is_consistent_with_state
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `yem_state_is_consistent_with_state`;
-
-CREATE TABLE `yem_state_is_consistent_with_state` (
-  `idState1` int(11) unsigned NOT NULL DEFAULT '0',
-  `idState2` int(11) unsigned NOT NULL DEFAULT '0',
-  `coherence` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`idState1`,`idState2`),
-  KEY `idState2` (`idState2`),
-  CONSTRAINT `yem_state_is_consistent_with_state_ibfk_1` FOREIGN KEY (`idState1`) REFERENCES `yem_state` (`id`),
-  CONSTRAINT `yem_state_is_consistent_with_state_ibfk_2` FOREIGN KEY (`idState2`) REFERENCES `yem_state` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `yem_state_is_consistent_with_state` WRITE;
-/*!40000 ALTER TABLE `yem_state_is_consistent_with_state` DISABLE KEYS */;
-
-INSERT INTO `yem_state_is_consistent_with_state` (`idState1`, `idState2`, `coherence`)
-VALUES
-	(1,2,0),
-	(2,3,0);
-
-/*!40000 ALTER TABLE `yem_state_is_consistent_with_state` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -297,6 +270,33 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table yem_state_is_consistent_with_state
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `yem_state_is_consistent_with_state`;
+
+CREATE TABLE `yem_state_is_consistent_with_state` (
+  `idState1` int(11) unsigned NOT NULL DEFAULT '0',
+  `idState2` int(11) unsigned NOT NULL DEFAULT '0',
+  `coherence` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`idState1`,`idState2`),
+  KEY `idState2` (`idState2`),
+  CONSTRAINT `yem_state_is_consistent_with_state_ibfk_1` FOREIGN KEY (`idState1`) REFERENCES `yem_state` (`id`),
+  CONSTRAINT `yem_state_is_consistent_with_state_ibfk_2` FOREIGN KEY (`idState2`) REFERENCES `yem_state` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `yem_state_is_consistent_with_state` WRITE;
+/*!40000 ALTER TABLE `yem_state_is_consistent_with_state` DISABLE KEYS */;
+
+INSERT INTO `yem_state_is_consistent_with_state` (`idState1`, `idState2`, `coherence`)
+VALUES
+	(1,2,0),
+	(2,3,0);
+
+/*!40000 ALTER TABLE `yem_state_is_consistent_with_state` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table yem_state_leads_to_question
 # ------------------------------------------------------------
 
@@ -367,7 +367,7 @@ DROP TABLE IF EXISTS `yem_user`;
 
 CREATE TABLE `yem_user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `nom` text,
+  `name` text,
   `idGroup` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idGroup` (`idGroup`),
@@ -377,7 +377,7 @@ CREATE TABLE `yem_user` (
 LOCK TABLES `yem_user` WRITE;
 /*!40000 ALTER TABLE `yem_user` DISABLE KEYS */;
 
-INSERT INTO `yem_user` (`id`, `nom`, `idGroup`)
+INSERT INTO `yem_user` (`id`, `name`, `idGroup`)
 VALUES
 	(1,'François',1),
 	(2,'Jean-Christophe',1),
