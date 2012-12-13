@@ -1,8 +1,14 @@
 var User = new Object();
 
+User.currentID ='';
 User.currentName ='';
-User.
+User.humeur = '';
+User.answer ='';
 
 
 
-var user = new User();
+
+User.getAnswer = function(){
+	
+	this.answer = $("#reponse").value;
+}

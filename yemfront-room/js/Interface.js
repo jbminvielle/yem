@@ -4,21 +4,21 @@ var Interface = new Object();
 
 
 Interface.playS = function(){
-	console.log("coucou");
 
 };
 
 
-var view = {
-  title: "Joe",
-  calc: function () {
-    return 2 + 4;
-  }
-};
-
-var output = Mustache.render("{{title}} spends {{calc}}", view);
 
 
 
 
+
+
+
+
+Interface.ShowTemplate = function(jsonobj, templatenb){
+		$("body").children("div").remove();
+		var output = Mustache.render(Webservice.get= function("template", templatenb), jsonobj);
+		$("body").append(output);
+}
 
