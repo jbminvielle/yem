@@ -1,4 +1,45 @@
+@font-face{  
+	font-family: "HelveticaNeueLTCom-Roman"; 
+	font-style: normal;
+	font-weight: normal;
+	src: 	url('../assets/fonts/HelveticaNeueLTCom-Roman.ttf'),
+			url('../assets/fonts/HelveticaNeueLTCom-Bd.ttf')   
+        	
+}
+
+
+
 body{
 	background: url(../assets/img/bg.jpg) no-repeat;
 	background-size:100%;
+}
+
+header{
+	width: 223px;
+	height: 133px;
+	margin: 6% auto 0;
+	background: url(../assets/img/logo.png);
+}
+
+#text{
+	width: 485px;
+	border-top: solid 1px #b0afaf;
+	border-bottom: solid 1px #bab8b8;
+	color: #f8f8fb;
+	font-family: HelveticaNeueLTCom-Roman;
+	font-size: 11pt;
+	/*line-height: 0.98em;*/
+	text-align: center;
+	margin: 30px auto;
+	padding: 7px
+}
+
+#enter{
+	color: #fbfafa;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 11pt;
+	/*line-height: 0.98em;*/
+	text-align: center;
+	margin: 30px auto;
+	padding: 7px
 }
