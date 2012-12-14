@@ -7,6 +7,14 @@
         	
 }
 
+@font-face{  
+	font-family: "HelveticaNeueLTCom-Bd"; 
+	font-style: normal;
+	font-weight: normal;
+	src:	url('../assets/fonts/HelveticaNeueLTCom-Bd.ttf')   
+        	
+}
+
 
 
 body{
@@ -38,8 +46,22 @@ header{
 	color: #fbfafa;
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 11pt;
-	/*line-height: 0.98em;*/
 	text-align: center;
-	margin: 30px auto;
-	padding: 7px
+	margin: 85px auto;
+}
+
+#in{
+	width: 478px;
+	height: 123px;
+	border: solid 1px #fff;
+	color: #87be2f;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 48pt;
+	text-align: center;
+	margin: 85px auto;
+}
+
+#name{
+	height: 123px;
+	padding-top: 20px;
 }
