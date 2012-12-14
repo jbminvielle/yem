@@ -97,8 +97,25 @@ function action_orderMeats($request) {
 
 function calculateFeelings($userId) {
 
-	$sqlData = mysql_query('SELECT S.id FROM yem_state S, yem_answer A, yem_answer_informs_about_state I WHERE S.id=I.idState AND A.id=I.idAnswer AND A.id='.$request['answer_id']);
+	$feelings = new Array();
 
+	$sqlData = mysql_query('SELECT F.id, F.name, A.characteristics FROM yem_feeling F, yem_animation A, yem_user_has_state US, yem_state_needs_feeling SF WHERE US.idUser=2 AND US.idState=SF.idState AND F.id=SF.idFeeling AND F.idAnimation=A.id');
+	while($r = mysql_fetch_assoc($sqlData)) {
+		array_push($feelings, array(
+			'id'=>$r['id'],
+			'name'=$r['id'],
+			'animation'=>json_decode($r['characteristics']));
+	}
+	return $feelings;
+
+	/*
+	$feelings = [
+		{
+			"id": x,
+			"name": truc,
+			"animation": { ordres d'animation }
+		}
+	]
 }
 
 
