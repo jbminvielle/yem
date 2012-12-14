@@ -116,6 +116,7 @@ function calculateFeelings($userId) {
 			"animation": { ordres d'animation }
 		}
 	]
+	*/
 }
 
 
