@@ -169,10 +169,9 @@ header{
 
 #load{
 	width:83px;
-	height: 100px;
+	height: 42px;
 	background: url(../assets/img/img_load.png) no-repeat;
 	margin: 1% auto 0 auto;
-	/* <div id="load">
-    	</div>  */ 
+	background-size: 49%;
 }
 
