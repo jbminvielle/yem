@@ -1,4 +1,3 @@
-
 <?php
 	
 	/*
@@ -20,6 +19,8 @@
 	3) "orderMeats" -- params = [INT user_id, ARRAY meats, ARRAY user_answers, ARRAY user_feelings]
 		Save in user_order_plate the meats
 		save stats for questions/feelings/plate : for one meat we will be able to know how user answered and feeld
+
+	4) "nextTemplate" --
 
 
 	Note : we don't keep answers from the user, just feelings associated with them

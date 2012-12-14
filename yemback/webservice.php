@@ -10,7 +10,7 @@
 */
 
 require("conf_sql.php");
-define(NB_STATES_REQUIRED, 4);
+define(NB_STATES_REQUIRED, 6);
 
 $data = $_GET;
 unset($data['service']); // GTFO webservice name !
@@ -51,19 +51,19 @@ function action_createUser($array) {
 	else return $id;
 }
 
-function action_sendAnswer($array) {
+function action_sendAnswer($request) {
 	//verify if every needed args are present :
-	if(!isset($array['user_id']) || !isset($array['question_id']) || !isset($array['answer_id'])) return false;
+	if(!isset($request['user_id']) || !isset($request['question_id']) || !isset($request['answer_id'])) return false;
 
 	openSQLBase();
 
 	// Get states for this answer
-	$sqlData = mysql_query('SELECT S.id FROM yem_state S, yem_answer A, yem_answer_informs_about_state I WHERE S.id=I.idState AND A.id=I.idAnswer AND A.id='.$array['answer_id']);
+	$sqlData = mysql_query('SELECT S.id FROM yem_state S, yem_answer A, yem_answer_informs_about_state I WHERE S.id=I.idState AND A.id=I.idAnswer AND A.id='.$request['answer_id']);
 	$VALUES = '';
 	$i = 1;
 	while($r = mysql_fetch_assoc($sqlData)) {
 		$VALUES .= '(';
-		$VALUES .= $r['id'].','.$array['user_id'];
+		$VALUES .= $r['id'].','.$request['user_id'];
 
 		$VALUES .= ')'; if($i < mysql_num_rows($sqlData)) $VALUES .= ',';
 		$i++;
@@ -75,18 +75,34 @@ function action_sendAnswer($array) {
 	//increment "importance" for this combinaison
 	mysql_query('UPDATE yem_user_has_state SET importance = importance + 1');
 
-	return array('status'=> 'end');
+	//return request('status'=> 'end');
 
 	// Calculate feelings user must meet
+	$currentCalcullatedFeelings = calculateFeelings($request['user_id']);
+
+
 	// Check if the user has enough entry
 	// If true, returns a status:end, feelings, animations associated and meats to show
 	// Else, returns a status:newQuestion, new Question to ask, feelings, animations associated.
 	
 }
 
-function action_orderMeats($array) {
+function action_orderMeats($request) {
 	// Save in user_order_plate the meats
 	// save stats for questions/feelings/plate : for one meat we will be able to know how user answered and feeld
 }
+
+
+//internal :
+
+function calculateFeelings($userId) {
+
+	$sqlData = mysql_query('SELECT S.id FROM yem_state S, yem_answer A, yem_answer_informs_about_state I WHERE S.id=I.idState AND A.id=I.idAnswer AND A.id='.$request['answer_id']);
+
+}
+
+
+
+
 
 ?>
