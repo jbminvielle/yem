@@ -7,18 +7,47 @@
         	
 }
 
+@font-face{  
+	font-family: "HelveticaNeueLTCom-Bd"; 
+	font-style: normal;
+	font-weight: normal;
+	src:	url('../assets/fonts/HelveticaNeueLTCom-Bd.ttf')   
+        	
+}
 
+html{
+	margin:0;
+	padding: 0;
+	background: url(../assets/img/newBG.jpg) no-repeat center fixed;
+	 -webkit-background-size: cover; /* pour Chrome et Safari */
+  	 -moz-background-size: cover; /* pour Firefox */
+  	 -o-background-size: cover; /* pour Opera */
+      background-size: cover; /* version standardisée */
+}
 
 body{
-	background: url(../assets/img/bg.jpg) no-repeat;
-	background-size:100%;
+	background: url(../assets/img/main-bg1.jpg) repeat;
+}
+
+section{
+	width: 100%;
+	height: 100%;
+	background: url(../assets/img/bg2.jpg) no-repeat;
+	background-size: 100%;
 }
 
 header{
+	width: 100%;
+	height: 133px;  	
+}
+
+#logo{
 	width: 223px;
 	height: 133px;
-	margin: 6% auto 0;
-	background: url(../assets/img/logo.png);
+	margin-top: 6%;
+	margin-left: auto;
+	margin-right: auto;
+	background: url(../assets/img/logo.png) no-repeat;
 }
 
 #text{
@@ -27,10 +56,11 @@ header{
 	border-bottom: solid 1px #bab8b8;
 	color: #f8f8fb;
 	font-family: HelveticaNeueLTCom-Roman;
-	font-size: 11pt;
+	font-size: 10.5pt;
 	/*line-height: 0.98em;*/
 	text-align: center;
-	margin: 30px auto;
+	/*margin: 30px auto;*/
+	margin: 3% auto;
 	padding: 7px
 }
 
@@ -38,8 +68,22 @@ header{
 	color: #fbfafa;
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 11pt;
-	/*line-height: 0.98em;*/
 	text-align: center;
-	margin: 30px auto;
-	padding: 7px
+	margin: 85px auto;
+}
+
+#in{
+	width: 478px;
+	height: 123px;
+	border: solid 1px #fff;
+	color: #87be2f;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 48pt;
+	text-align: center;
+	margin: 85px auto;
+}
+
+#name{
+	height: 123px;
+	margin-top: 20px;
 }
