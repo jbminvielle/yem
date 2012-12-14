@@ -27,11 +27,11 @@ Webservice.kinect = function(){
 
 };
 
-Webservice.nextTemplate= function( id1, answer1){
+Webservice.nextQuestion = function(answer1){
 							 
 		$.ajax({ 
 		   url: "bdd.php",
-		   data: { value : actualtemplate, id : id1, answer : answer1 }
+		   data: { answer : answer1 }
 		   success: function(mov){
 		   		result = mov;
 		   }
@@ -39,4 +39,6 @@ Webservice.nextTemplate= function( id1, answer1){
 		return result; 
 	});
 };
+
+
 

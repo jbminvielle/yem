@@ -3,14 +3,15 @@ var i=2;
 user.currentID = 1335443;
 user.currentName ='Joséphine Bobol';
 
+
 $("#button").click(function() {
   user.humeur = Webservice.kinect();
   Interface.ShowTemplate(user, 1);
   while(i!="last"){
 
-  	Interface.ShowTemplate(user, i);
+  	Interface.ShowTemplate(i, question);
   	var answer = user.getAnswer();
-  	i = Webservice.nextTemplate(i, answer);
+  	i = Webservice.nextQuestion(answer);
 
 
 
