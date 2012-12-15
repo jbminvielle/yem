@@ -245,4 +245,5 @@ function getRandQuestion($questionsAlreadyAsked) {
 	return $result;
 }
 
+
 ?>
