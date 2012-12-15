@@ -15,7 +15,7 @@
 		Returns	: INT userId
 
 	2) "sendAnswer"
-		Params 	: [
+		Params	: [
 					INT user_id,
 					INT question_id,
 					INT answer_id,
@@ -33,12 +33,11 @@
 					ARRAY meats = [{INT id, STRING name, STRING description, STRING price, STRING picture}, {...}, ...],
 					ARRAY feelings = [{ INT id, STRING name, OBJECT animation}, {...}, ...] 
 				  }
+
 	3) "orderMeats"
 		Params 	: [INT user_id, INT meat_id]
 		Returns : BOOL sucess
 		
-
-	Note : we don't keep answers from the user, just feelings associated with them
 
 	*/
 
