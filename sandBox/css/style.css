@@ -85,7 +85,18 @@ header{
 
 #name{
 	height: 123px;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
+}
+
+input{
+	width: 474px;
+	height: 118px;
+	background-color: transparent;
+	border-color: transparent;
+	color: #87be2f;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 48pt;
+	text-align: center;
 }
 
 /* ------------------------------------------------------------  
@@ -169,9 +180,9 @@ header{
 
 #load{
 	width:83px;
-	height: 42px;
-	background: url(../assets/img/img_load.png) no-repeat;
+	height: 82px;
+	background: url(../assets/img/loader.gif) no-repeat;
 	margin: 1% auto 0 auto;
-	background-size: 49%;
+	background-size: 100%;
 }
 
