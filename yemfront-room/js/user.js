@@ -9,5 +9,8 @@ User.answer ='';
 
 
 User.getAnswer = function(){
-	this.answer = $("#reponse").value;
+	$("#reponse").change(function(){
+		this.answer = $("#reponse").value;
+	});
+	
 }
