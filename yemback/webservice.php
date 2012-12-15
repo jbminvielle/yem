@@ -10,7 +10,8 @@
 */
 
 require("conf_sql.php");
-define(NB_STATES_REQUIRED, 6);
+define('NB_FEELINGS_REQUIRED', 6);
+session_start();
 
 $data = $_GET;
 unset($data['service']); // GTFO webservice name !
@@ -75,16 +76,37 @@ function action_sendAnswer($request) {
 	//increment "importance" for this combinaison
 	mysql_query('UPDATE yem_user_has_state SET importance = importance + 1');
 
-	//return request('status'=> 'end');
+	//get updated yem_user_has_state :
+	$currentStates = array();
+	$sqlData = mysql_query('SELECT idState FROM yem_user_has_state WHERE idUser='.$request['user_id']);
+	while($r = mysql_fetch_assoc($sqlData)) {
+		$currentStates[] = $r['idState'];
+	}
 
 	// Calculate feelings user must meet
-	$currentCalcullatedFeelings = calculateFeelings($request['user_id']);
+	$currentCalculatedFeelings = calculateFeelings($request['user_id']);
 
+	// Check if the user has enough feelings
+	if(count($currentCalculatedFeelings)>=NB_FEELINGS_REQUIRED) {
+		// If true, returns a status:end, feelings, animations associated and meats to show
+		$result= array('status'=> 'end',
+						'meats'=> getMeats($currentCalculatedFeelings),
+						'feelings'=>$currentCalculatedFeelings
+					);
+	}
 
-	// Check if the user has enough entry
-	// If true, returns a status:end, feelings, animations associated and meats to show
-	// Else, returns a status:newQuestion, new Question to ask, feelings, animations associated.
-	
+	else {
+		// Else, returns a status:newQuestion, new Question to ask, feelings, animations associated.
+		$qAndR = getNewQuestion($currentStates, $request['user_id']);
+		$result= array('status'=> 'newQuestion',
+						'question_content'=> $qAndR['question_content'],
+						'question_id'=> $qAndR['question_id'],
+						'answers'=>$qAndR['answers'],
+						'feelings'=>$currentCalculatedFeelings
+					);
+	}
+
+	return $result;
 }
 
 function action_orderMeats($request) {
@@ -97,14 +119,14 @@ function action_orderMeats($request) {
 
 function calculateFeelings($userId) {
 
-	$feelings = new Array();
+	$feelings = array();
 
-	$sqlData = mysql_query('SELECT F.id, F.name, A.characteristics FROM yem_feeling F, yem_animation A, yem_user_has_state US, yem_state_needs_feeling SF WHERE US.idUser=2 AND US.idState=SF.idState AND F.id=SF.idFeeling AND F.idAnimation=A.id');
+	$sqlData = mysql_query('SELECT F.id, F.name, A.characteristics FROM yem_feeling F, yem_animation A, yem_user_has_state US, yem_state_needs_feeling SF WHERE US.idUser='.$userId.' AND US.idState=SF.idState AND F.id=SF.idFeeling AND F.idAnimation=A.id');
 	while($r = mysql_fetch_assoc($sqlData)) {
 		array_push($feelings, array(
 			'id'=>$r['id'],
-			'name'=$r['id'],
-			'animation'=>json_decode($r['characteristics']));
+			'name'=>$r['name'],
+			'animation'=>json_decode($r['characteristics'])));
 	}
 	return $feelings;
 
@@ -120,7 +142,94 @@ function calculateFeelings($userId) {
 }
 
 
+function getMeats($feelings) {
 
+	$meats = array();
 
+	foreach ($feelings as $feeling) {
+		$sqlData = mysql_query('SELECT M.id, M.name, M.description, M.picture, M.price FROM yem_meat M, yem_meat_gives_feeling MF WHERE M.id=MF.idMeat AND MF.idFeeling='.$feeling['id']);
+
+		while($r = mysql_fetch_assoc($sqlData)) {
+			array_push($meats, $r);
+		}
+		/*
+		$meats = [
+			{
+				"id": x,
+				"name": "truc",
+				"price": "x€",
+				"description": "lorem ipsum",
+				"picture": "kikou.jpeg",
+			}
+		]
+		*/
+	}
+	return $meats;
+}
+
+function getNewQuestion($states, $userId) {
+
+	if(!isset($_SESSION['questionsAlreadyAsked'])) $_SESSION['questionsAlreadyAsked'] = array();
+	if(!isset($_SESSION['questionsAlreadyAsked'][$userId])) $_SESSION['questionsAlreadyAsked'][$userId] = array();
+
+	$result = array();
+
+	if($states == array()) {
+		
+		//get first question in BDD
+		$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q LIMIT 1');
+		while($r = mysql_fetch_assoc($sqlData)) {
+			$result['question_id'] = $r['id'];
+			$result['question_content'] = $r['content'];
+		}
+	}
+
+	else {
+		error_log(json_encode($states));
+
+		//getting all possible questions
+		$questions = array();
+		foreach ($states as $state) {
+			$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_state_leads_to_question SQ, yem_question Q WHERE Q.id = SQ.idQuestion AND SQ.idState='.$state);
+
+			while($r = mysql_fetch_assoc($sqlData)) {
+				error_log($r['id']);
+				error_log('donne');
+				error_log($r['content']);
+				$questions[$r['id']] = $r['content'];
+			}
+		}
+		error_log(json_encode($questions));
+
+		//we count the number of iterations for each questions
+		$countOfQuestions = array();
+		foreach ($questions as $id=>$possibleQuestion) {
+			if(!isset($countOfQuestions[$id])) $countOfQuestions[$id] = 1;
+			else $countOfQuestions[$id]++;
+		}
+
+		//sorting by number of iterations
+		error_log(json_encode($countOfQuestions));
+		asort($countOfQuestions); // asort keep the associations with indexes (very important because we will get the question ID with this)
+		error_log(json_encode($countOfQuestions));
+
+		//get the object for the popular question
+		reset($countOfQuestions);
+		$goodId=key($countOfQuestions);
+		$result = array('question_id'=>$goodId, 'question_content'=>$questions[$goodId]);
+	}
+
+	//now getting responses associated with the selected question
+	$answers = array();
+	$sqlData = mysql_query('SELECT id, content FROM yem_answer WHERE idQuestion='.$result['question_id']) or die(mysql_error());
+	while($r = mysql_fetch_assoc($sqlData)) {
+		$answers[] = array('id'=>$r['id'], 'content'=>$r['content']);
+	}
+	$result['answers'] = $answers;
+
+	//saving that we'll ask this question in the serv session, to not ask it another time !
+	array_push($_SESSION['questionsAlreadyAsked'][$userId], $result['question_id']);
+	return $result;
+}
 
 ?>
