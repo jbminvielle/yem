@@ -1,0 +1,177 @@
+@font-face{  
+	font-family: "HelveticaNeueLTCom-Roman"; 
+	font-style: normal;
+	font-weight: normal;
+	src: 	url('../assets/fonts/HelveticaNeueLTCom-Roman.ttf'),
+			url('../assets/fonts/HelveticaNeueLTCom-Bd.ttf')   
+        	
+}
+
+@font-face{  
+	font-family: "HelveticaNeueLTCom-Bd"; 
+	font-style: normal;
+	font-weight: normal;
+	src:	url('../assets/fonts/HelveticaNeueLTCom-Bd.ttf')   
+        	
+}
+
+html{
+	margin:0;
+	padding: 0;
+	background: url(../assets/img/bg.jpg) no-repeat center fixed;
+	 -webkit-background-size: cover; /* pour Chrome et Safari */
+  	 -moz-background-size: cover; /* pour Firefox */
+  	 -o-background-size: cover; /* pour Opera */
+      background-size: cover; /* version standardisée */
+}
+
+
+body{
+	
+	color:#fff;
+}
+
+header{
+	width: 100%;
+	/*height: 110px;*/  	/* 133 */
+}
+
+/* ------------------------------------------------------------  
+						STYLE HOME			  
+   ------------------------------------------------------------ */
+
+#logoHome{              
+	width: 223px;
+	height: 133px;
+	margin-top: 5.5%;
+	margin-left: auto;
+	margin-right: auto;
+	background: url(../assets/img/logo.png) no-repeat;
+}
+
+
+#text{
+	width: 485px;
+	height: 170px;
+	border-top: solid 1px #b0afaf;
+	border-bottom: solid 1px #bab8b8;
+	color: #f8f8fb;
+	font-family: HelveticaNeueLTCom-Roman;
+	font-size: 10.5pt;
+	text-align: center;
+	margin: 4% auto;
+	padding: 8px 0 4px;
+}
+
+#enter{
+	height:20px;
+	color: #fbfafa;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 11pt;
+	text-align: center;
+	margin: 0% auto;
+}
+
+#in{
+	width: 478px;
+	height: 123px;
+	border: solid 1px #fff;
+	color: #87be2f;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 48pt;
+	text-align: center;
+	margin: 4% auto;
+}
+
+#name{
+	height: 123px;
+	margin-top: 20px;
+}
+
+/* ------------------------------------------------------------  
+						STYLE PAGE 2	  
+   ------------------------------------------------------------ */
+
+
+#logo{
+	width: 125px;
+	height: 100px;
+	margin-top: 2.2%;
+	margin-left: auto;
+	margin-right: auto;
+	background: url(../assets/img/logo.png) no-repeat;
+	background-size: 100%;
+}
+
+#cadre_video{
+	width: 635px;
+	height: 410px;
+	border-top: solid 1px #b0afaf;
+	border-bottom: solid 1px #bab8b8;
+	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
+	margin: 0px auto;
+}
+
+#name2{
+	width: 122px;
+	height: 55px;
+	border-bottom: solid 1px #bab8b8;
+	margin: 0 auto 0 auto;
+	color: #47b3ce;
+	font-family: HelveticaNeueLTCom-Bd;
+	text-align: center;
+}
+
+#name2_1{
+	height: 54px;
+	width: 60px;
+	margin: 0 auto 0 auto;
+	padding-top: 25%;
+}
+
+#question{
+	width: 638px;
+	height:82px;
+	margin: 2.5% auto 0 auto;
+	text-align: center;
+	font-family: HelveticaNeueLTCom-Bd;
+}
+
+#cadreG{
+	width: 35px;
+	height: 82px;
+	float: left;
+	border: 1px solid #fff;
+	border-width: 1px 0px 1px 1px;
+		
+}
+
+#textQuestion{
+	width: 566px;
+	height: 82px;
+	float: left;
+	padding-top: 5%;
+	}
+
+#cadreD{
+	width: 35px;
+	height: 82px;
+	float:right;
+	border: 1px solid #fff;
+	border-width: 1px 1px 1px 0;	
+} 
+
+/* ------------------------------------------------------------  
+						STYLE PAGE 3	  
+   ------------------------------------------------------------ */
+
+
+#load{
+	width:83px;
+	height: 42px;
+	background: url(../assets/img/img_load.png) no-repeat;
+	margin: 1% auto 0 auto;
+	background-size: 49%;
+}
+
