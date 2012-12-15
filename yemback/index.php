@@ -9,7 +9,7 @@
 	1) "createUser"
 		Creates a user in data
 		Returns the user ID.
-	2) "sendAnswer" -- params = [INT user_id, INT question_id, INT answer_id]
+	2) "sendAnswer" -- params = [INT user_id, INT question_id, INT answer_id, ARRAY questions_already_asked]
 		Create a user_has_state entry corresponding to answer
 		Calculate feelings user must meet
 		Check if the user has enough entry

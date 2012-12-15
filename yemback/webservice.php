@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /*
 	webservice.php
@@ -11,23 +11,23 @@
 
 require("conf_sql.php");
 define('NB_FEELINGS_REQUIRED', 6);
-session_start();
+header('Content-Type: text/html; charset=utf-8');
 
-$data = $_GET;
+$data = $_REQUEST;
 unset($data['service']); // GTFO webservice name !
  
-//echo 'action_'.$_GET['service'].'(array('.implode(', ', $data).')';
-if(!function_exists('action_'.$_GET['service']))  {
+//echo 'action_'.$_REQUEST['service'].'(array('.implode(', ', $data).')';
+if(!function_exists('action_'.$_REQUEST['service']))  {
 	header("HTTP/1.0 404 Not Found");
-	echo '<h1>Error 404</h1><p>Webservice '.$_GET['service'].' not found.</p>';
+	echo '<h1>Error 404</h1><p>Webservice '.$_REQUEST['service'].' not found.</p>';
 }
 else {
-	$render = call_user_func('action_'.$_GET['service'], $data);
+	$render = call_user_func('action_'.$_REQUEST['service'], $data);
 	if(is_array($render)) echo json_encode($render);
 	else if($render !== false) echo $render;
 	else { //error !
 		header("HTTP/1.0 500");
-		echo '<h1>Error 500</h1><p>Webservice '.$_GET['service'].' responded with an error.</p>';	
+		echo '<h1>Error 500</h1><p>Webservice '.$_REQUEST['service'].' responded with an error.</p>';	
 	}
 }
 
@@ -54,7 +54,7 @@ function action_createUser($array) {
 
 function action_sendAnswer($request) {
 	//verify if every needed args are present :
-	if(!isset($request['user_id']) || !isset($request['question_id']) || !isset($request['answer_id'])) return false;
+	if(!isset($request['user_id']) || !isset($request['question_id']) || !isset($request['answer_id']) || !isset($request['questionsAlreadyAsked'])) return false;
 
 	openSQLBase();
 
@@ -86,25 +86,26 @@ function action_sendAnswer($request) {
 	// Calculate feelings user must meet
 	$currentCalculatedFeelings = calculateFeelings($request['user_id']);
 
-	// Check if the user has enough feelings
-	if(count($currentCalculatedFeelings)>=NB_FEELINGS_REQUIRED) {
-		// If true, returns a status:end, feelings, animations associated and meats to show
-		$result= array('status'=> 'end',
-						'meats'=> getMeats($currentCalculatedFeelings),
-						'feelings'=>$currentCalculatedFeelings
-					);
-	}
-
-	else {
-		// Else, returns a status:newQuestion, new Question to ask, feelings, animations associated.
-		$qAndR = getNewQuestion($currentStates, $request['user_id']);
-		$result= array('status'=> 'newQuestion',
+	// Check if the user has not enough feelings
+	if(count($currentCalculatedFeelings) < NB_FEELINGS_REQUIRED) {
+		// If true, returns a status:newQuestion, new Question to ask, feelings, animations associated.
+		$qAndR = getNewQuestion($currentStates, $request['user_id'], $request['questionsAlreadyAsked']);
+		if($qAndR != false) {
+			$result= array('status'=> 'newQuestion',
 						'question_content'=> $qAndR['question_content'],
 						'question_id'=> $qAndR['question_id'],
 						'answers'=>$qAndR['answers'],
 						'feelings'=>$currentCalculatedFeelings
 					);
+			return $result;
+		}
 	}
+
+	// if enough feelings or getNewQuestion failed, returns a status:end, feelings, animations associated and meats to show
+	$result= array('status'=> 'end',
+					'meats'=> getMeats($currentCalculatedFeelings),
+					'feelings'=>$currentCalculatedFeelings
+				);
 
 	return $result;
 }
@@ -167,23 +168,11 @@ function getMeats($feelings) {
 	return $meats;
 }
 
-function getNewQuestion($states, $userId) {
-
-	if(!isset($_SESSION['questionsAlreadyAsked'])) $_SESSION['questionsAlreadyAsked'] = array();
-	if(!isset($_SESSION['questionsAlreadyAsked'][$userId])) $_SESSION['questionsAlreadyAsked'][$userId] = array();
+function getNewQuestion($states, $userId, $questionsAlreadyAsked) {
 
 	$result = array();
 
-	if($states == array()) {
-		
-		//get first question in BDD
-		$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q LIMIT 1');
-		while($r = mysql_fetch_assoc($sqlData)) {
-			$result['question_id'] = $r['id'];
-			$result['question_content'] = $r['content'];
-		}
-	}
-
+	if($states == array()) $result = getRandQuestion($questionsAlreadyAsked);
 	else {
 		error_log(json_encode($states));
 
@@ -193,42 +182,66 @@ function getNewQuestion($states, $userId) {
 			$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_state_leads_to_question SQ, yem_question Q WHERE Q.id = SQ.idQuestion AND SQ.idState='.$state);
 
 			while($r = mysql_fetch_assoc($sqlData)) {
-				error_log($r['id']);
-				error_log('donne');
-				error_log($r['content']);
-				$questions[$r['id']] = $r['content'];
+				$questions[$r['id']] = mb_convert_encoding($r['content'], "UTF-8", "ASCII");
 			}
 		}
-		error_log(json_encode($questions));
 
 		//we count the number of iterations for each questions
 		$countOfQuestions = array();
 		foreach ($questions as $id=>$possibleQuestion) {
+			//don't insert questions already asked !
+			if(in_array($id, $questionsAlreadyAsked)) continue;
+
 			if(!isset($countOfQuestions[$id])) $countOfQuestions[$id] = 1;
 			else $countOfQuestions[$id]++;
 		}
 
-		//sorting by number of iterations
-		error_log(json_encode($countOfQuestions));
-		asort($countOfQuestions); // asort keep the associations with indexes (very important because we will get the question ID with this)
-		error_log(json_encode($countOfQuestions));
+		if($countOfQuestions == array()) $result = getRandQuestion($questionsAlreadyAsked);
+		else {
 
-		//get the object for the popular question
-		reset($countOfQuestions);
-		$goodId=key($countOfQuestions);
-		$result = array('question_id'=>$goodId, 'question_content'=>$questions[$goodId]);
+			//sorting by number of iterations
+			error_log(json_encode($countOfQuestions));
+			asort($countOfQuestions); // asort keep the associations with indexes (very important because we will get the question ID with this)
+			error_log(json_encode($countOfQuestions));
+
+			//get the object for the popular question
+			reset($countOfQuestions);
+			$goodId=key($countOfQuestions);
+			$result = array('question_id'=>$goodId, 'question_content'=>$questions[$goodId]);
+		}
 	}
+
+	//if we have a question !
+	if(!isset($result['question_id'])) return false;
 
 	//now getting responses associated with the selected question
 	$answers = array();
+	echo 'SELECT id, content FROM yem_answer WHERE idQuestion='.$result['question_id'];
 	$sqlData = mysql_query('SELECT id, content FROM yem_answer WHERE idQuestion='.$result['question_id']) or die(mysql_error());
 	while($r = mysql_fetch_assoc($sqlData)) {
-		$answers[] = array('id'=>$r['id'], 'content'=>$r['content']);
+		$answers[] = array('id'=>$r['id'], 'content'=>mb_convert_encoding($r['content'], "UTF-8", "ASCII"));
 	}
 	$result['answers'] = $answers;
 
 	//saving that we'll ask this question in the serv session, to not ask it another time !
-	array_push($_SESSION['questionsAlreadyAsked'][$userId], $result['question_id']);
+	return $result;
+}
+
+function getRandQuestion($questionsAlreadyAsked) {
+	//get first question in BDD not asked :
+
+	//translate questions already asked for WHERE SQL statement
+	$WHERE = '';
+	foreach ($questionsAlreadyAsked as $i => $id) {
+		$WHERE .= 'id != '.$id;
+		if($i+1<count($questionsAlreadyAsked)) $WHERE .= ' AND ';
+	}
+
+	$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q WHERE '.$WHERE.' LIMIT 1');
+	while($r = mysql_fetch_assoc($sqlData)) {
+		$result['question_id'] = $r['id'];
+		$result['question_content'] = ($r['content']);
+	}
 	return $result;
 }
 
