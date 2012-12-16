@@ -1,16 +1,19 @@
-function User() {
+if(typeof YEM == 'undefined') YEM = {};
 
-	this.currentID;
-	this.currentName;
-	this.humeur;
-	this.answer;
+YEM.User= function() {
 
+	this.ID;
+	this.name;
+	this.surname;
+	this.questionsAnswered;
+	this.answers;
+	this.states;
 }
 
 
 
 
-User.getAnswer = function(){
+YEM.User.getAnswer = function(){
 	$("#reponse").change(function(){
 		this.answer = $("#reponse").value;
 	});

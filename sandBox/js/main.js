@@ -1,39 +1,58 @@
-
-var i=2;
+//var i=2;
 const WAITINGTIME = 10*1000
 
+// $("#reponse").change(function(){
+//   //user.humeur = Webservice.kinect();
+//   //Interface.ShowTemplate(user, scan);
+//   while(i!="last"){
 
-$("#reponse").change(function(){
-  //user.humeur = Webservice.kinect();
-  //Interface.ShowTemplate(user, scan);
-  while(i!="last"){
+//   	Interface.ShowTemplate({nom : coucou, question: coucoucou}, question);
+//   	var answer = user.getAnswer();
+//   	i = Webservice.nextQuestion(answer);
 
-  	Interface.ShowTemplate({nom : coucou, question: coucoucou}, question);
-  	var answer = user.getAnswer();
-  	i = Webservice.nextQuestion(answer);
-
-  }
-
-
-});
+//   }
 
 
-Interface.ShowTemplate(null, 'waiter');
+// });
 
-onclick { //ou autre évènement qui lance le process
+var YEM = YEM || {}; //Namespace
 
-	// étape 1
-	Interface.ShowTemplate(null, 'bonjour');
+	// class beginning
+	YEM.Main = {
+		customer: null,
+		launch: function() {
 
-	//on crée un utilisateur pour stocker ses infos
-	var customer = new User();
-	
-	var customer.name = Cyril.listenTo('');
-	customer.id = Webservice.server('createUser');
+			//YEM.Interface.ShowTemplate(null, 'waiter');
+
+			$('#speech_surname').click(function() { //ou autre évènement qui lance le process
+				// étape 1
+				//Interface.ShowTemplate(null, 'bonjour');
+
+				//on crée un utilisateur pour stocker ses infos
+				self.customer = new YEM.User();
+				
+				YEM.Cyril.listenTo('surname', self.saveNameAndGoToQuestions);
+				//customer.id = Webservice.server('createUser');
+			});
+		},
+
+		saveNameAndGoFurther: function(name) {
+			self.customer.name = name;
+			self.customer.id = Webservice.server('createUser', {'name': name});
 
 
 
-}
+		}
+	};
+
+// alias
+var self = YEM.Main;
+
+YEM.Main.launch();
+
+
+
+
 // 	// étape 2
 // 	Interface.playStreaming();
 

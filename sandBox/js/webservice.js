@@ -1,41 +1,25 @@
-var Webservice = new Object();
+if(typeof YEM == 'undefined') YEM = {};
 
-Webservice.get= function(value1, id1){
-							 
+YEM.Webservice = new Object();
+
+YEM.Webservice.get= function(url, params){
+
 		$.ajax({ 
-		   url: "../../yemback/webservice.php",
-		   data: { value : value1, id : id1 },
-		   success: function(mov){
-		   		result = mov;
+		   url: url,
+		   data: params,
+		   success: function(data){
+		   	result = data;
 		   }
 		});
 		return result; 
 	};
 
-Webservice.kinect = function(){
+YEM.Webservice.kinect = function(serviceName){
 
-		$.ajax({ 
-		   url: "../../yemback/webservice.php",
-		   data: { humeur : humeur },
-		   success: function(mov){
-		   		result = mov;
-		   }
-		});
-		return result; 
-	};
+	return YEM.Webservice.get("localhost:4123", {});
+};
 
-
-Webservice.nextQuestion = function(answer1){
-							 
-		$.ajax({ 
-		   url: "../../yemback/webservice.php",
-		   data: { answer : answer1 },
-		   success: function(mov){
-		   		result = mov;
-		   }
-		});
-		return result; 
-	};
-
-
-
+YEM.Webservice.server = function(serviceName, params) {
+	var tmp = params; tmp.service = serviceName
+	return YEM.Webservice.get("../../yemback/webservice.php", tmp);
+}

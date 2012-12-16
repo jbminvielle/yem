@@ -11,7 +11,7 @@
 	Ci dessous la liste des sebservices :
 
 	1) "createUser"
-		Params 	: []
+		Params 	: [ STRING name]
 		Returns	: INT userId
 
 	2) "sendAnswer"

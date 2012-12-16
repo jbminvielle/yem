@@ -11,7 +11,6 @@
 
 require("conf_sql.php");
 define('NB_FEELINGS_REQUIRED', 6);
-header('Content-Type: text/html; charset=utf-8');
 
 $data = $_REQUEST;
 unset($data['service']); // GTFO webservice name !
