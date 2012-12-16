@@ -22,7 +22,7 @@ var YEM = YEM || {}; //Namespace
 		customer: null,
 
 		launch: function() {
-			YEM.Interface.ShowTemplate(null, 'waiter');
+			//YEM.Interface.ShowTemplate(null, 'waiter');
 			self.showNameScreen();
 		},
 
@@ -30,9 +30,9 @@ var YEM = YEM || {}; //Namespace
 
 		showNameScreen: function() {
 
-			$('#speech_surname').click(function() { //ou autre évènement qui lance le process
+			$('body').ready(function() { //ou autre évènement qui lance le process
 				// étape 1
-				//Interface.ShowTemplate(null, 'bonjour');
+				YEM.Interface.ShowTemplate(null, 'formNom');
 
 				//on crée un utilisateur pour stocker ses infos
 				self.customer = new YEM.User();
