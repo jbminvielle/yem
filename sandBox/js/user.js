@@ -10,12 +10,12 @@ YEM.User= function() {
 	this.states;
 }
 
-
-
-
-YEM.User.getAnswer = function(){
+YEM.User.prototype.getAnswer = function(){
 	$("#reponse").change(function(){
 		this.answer = $("#reponse").value;
 	});
-	
+}
+
+YEM.User.prototype.setId = function(id) {
+	this.id = id;
 }
