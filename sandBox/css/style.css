@@ -208,10 +208,55 @@ input{
 						STYLE PAGE 4	  
    ------------------------------------------------------------ */
 
-   #cadre_rond{
+#cadre_rond{
    	width: 424px;
 	height: 406px;
 	margin: 0px auto;
 	background: url(../assets/img/rond.png) no-repeat;
 	padding-bottom: 61px;
-   }
+}
+
+   /* ------------------------------------------------------------  
+						STYLE PAGE 7	  
+   ------------------------------------------------------------ */
+
+#cadre_video_petit{
+   	width: 635px;
+	height: 235px;
+	border-top: solid 1px #b0afaf;
+	border-bottom: solid 1px #bab8b8;
+	border-left: solid 1px #fff;
+	border-right: solid 1px #fff;
+	margin: 0px auto;
+}
+
+#blockHead{
+	width: 345px;
+	height: 231px;
+	margin: 0 auto 0 auto;
+}
+
+.quel, #element{
+   	width: 100%;
+   	font-family: HelveticaNeueLTCom-Bd;
+   	text-align: center;
+   	margin: auto;
+
+}
+
+.quel{
+	font-size: 16pt;
+	color: #fff;
+}
+
+#element{
+	color: #a1e8e0;
+	font-size: 22pt;
+}
+
+#picto{
+	width: 100%;
+	height: 78px;
+	background: url(../assets/img/picto.png) no-repeat;
+	margin-top: 40px; 
+}
