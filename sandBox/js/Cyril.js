@@ -28,7 +28,8 @@ YEM.Cyril.listenTo = function(tagId, callback){
 
 YEM.Cyril.SpeechChange = function() {
 	var answer = document.getElementById("speechRecognition").value;
-	
+	answer = answer.charAt(0).toUpperCase() + answer.slice(1);
+
 	// 3) Writing in the good tag and delete created one
 	document.getElementById('speech_'+YEM.Cyril.currentTagId).value = answer;
 	YEM.Cyril.listeningEl.parentNode.removeChild(YEM.Cyril.listeningEl);

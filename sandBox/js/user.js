@@ -16,6 +16,10 @@ YEM.User.prototype.getAnswer = function(){
 	});
 }
 
+YEM.User.prototype.setName = function(name) {
+	this.name = name.charAt(0).toUpperCase() + name.slice(1); //capitalise
+}
+
 YEM.User.prototype.setId = function(id) {
 	this.id = id;
 }

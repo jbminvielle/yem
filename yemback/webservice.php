@@ -40,7 +40,7 @@ function action_createUser($array) {
 	openSQLBase();
 
 	// Creates a user in data
-	mysql_query('INSERT INTO yem_user (name) VALUES ("'.$array['name'].'")');
+	mysql_query('INSERT INTO yem_user (name) VALUES ("'.utf8_decode($array['name']).'")');
 
 	// Returns the user ID
 	$id = mysql_insert_id();
