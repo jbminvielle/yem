@@ -1,5 +1,5 @@
 //var i=2;
-const WAITINGTIME = 10*1000
+const WAITINGTIME = 5*1000
 
 // $("#reponse").change(function(){
 //   //user.humeur = Webservice.kinect();
@@ -47,13 +47,16 @@ var YEM = YEM || {}; //Namespace
 			YEM.Webservice.server('createUser', {'name': name}, YEM.User.prototype.setId.bind(YEM.Main.customer));
 			//prototype.x.bind : see http://joshuakehn.com/2011/10/20/Understanding-JavaScript-Context.html
 			//for little explaination
+			setTimeout(function() {
+				self.showKinnectScreen();
+			}, WAITINGTIME);
+			
 		},
 
 		// étape 2
 
 		showKinnectScreen: function() {
-
-
+			YEM.Interface.ShowTemplate(null, 'resultatScan');
 		}
 
 	};
