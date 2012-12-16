@@ -54,6 +54,7 @@ header{
 	z-index: 1
 }
 
+
 /* ------------------------------------------------------------  
 						STYLE HOME			  
    ------------------------------------------------------------ */
@@ -91,24 +92,24 @@ header{
 }
 
 #in{
-	width: 478px;
-	height: 123px;
+	width: 635px;
+	height: 82px;
 	border: solid 1px #fff;
 	color: #87be2f;
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 48pt;
 	text-align: center;
-	margin: 4% auto;
+	margin: 6% auto;
 }
 
 #name{
-	height: 123px;
+	height: 82px;
 	/*margin-top: 20px;*/
 }
 
 input{
 	width: 474px;
-	height: 118px;
+	height: 80px;
 	background-color: transparent;
 	border-color: transparent;
 	color: #87be2f;
@@ -198,7 +199,7 @@ input{
 
 #load{
 	width:83px;
-	height: 43px;
+	height: 42px;
 	background: url(../assets/img/loader.gif) no-repeat;
 	margin: 1% auto 0 auto;
 	background-size: 100%;
@@ -213,7 +214,7 @@ input{
 	height: 406px;
 	margin: 0px auto;
 	background: url(../assets/img/rond.png) no-repeat;
-	padding-bottom: 61px;
+	padding-bottom: 62px;
 }
 
    /* ------------------------------------------------------------  
@@ -259,4 +260,10 @@ input{
 	height: 78px;
 	background: url(../assets/img/picto.png) no-repeat;
 	margin-top: 40px; 
+}
+
+#textHumeur{
+	width: 566px;
+	height: 82px;
+	float: left;
 }

@@ -41,7 +41,7 @@
 							<div id="cadreD"></div>
 						</div>  
 			</script>
-
+			<!-- Page de mise en attente et de scanner de la personne -->	
 			<script id="scan" type="text/template">
 						<header>
 							<div id="logo"></div>
@@ -58,6 +58,8 @@
 							</div> 
 						</div> 
 			</script>
+
+		<!-- Template de la home page; la ou on demande le nom de l'utilisateur -->		
       <script id="formNom" type="text/template">
   			<header>
   					<div id="logoHome"></div>
@@ -86,6 +88,7 @@
   			</article>
     	</script>
 
+    	<!-- Template du resultat du scanner faciale, on renvoit l'humeur -->	
     	 <script id="resultatScan" type="text/template">
     	 	 <header>
       			<div id="logo"></div>
@@ -96,9 +99,40 @@
 
     		<div id="question">
     			<div id="cadreG"></div>
-      				<div id="textQuestion">VOTRE EXPRESSION FACIALE REVELE QUE VOUS ETES D HUMEUR JOYEUSE</div>
+      				<div id="textQuestion">{{humeur}}</div>
       			<div id="cadreD"></div>
     		</div>  
+    	 </script>
+
+
+    	 <!-- Template question sur les element -->	
+    	 <script type="text/template">
+    	 	 <header>
+      <div id="logo"></div>
+    </header>  
+    <div id="blockHead">
+	    <div class="quel">
+	    	QUEL EST VOTRE
+	    </div>
+	    <div id="element">
+	    	ELEMENT 
+	    	<div class="quel">?</div>
+	    </div>
+	    <div id="picto">
+	    </div>	
+	</div>
+   	<div id="cadre_video_petit">
+   	</div>
+
+    <div id="question">
+    	<div id="cadreG"></div>
+      		<div id="textHumeur">
+      			<form METHOD=POST>
+  					<input type="text" name="surname" id="speech_element"></input>
+  					</form>
+      		</div>
+      	<div id="cadreD"></div>
+    </div> 
     	 </script>
 		<script src="js/main.js" type="text/javascript"></script>
 
