@@ -20,9 +20,15 @@ var YEM = YEM || {}; //Namespace
 	// class beginning
 	YEM.Main = {
 		customer: null,
-		launch: function() {
 
-			//YEM.Interface.ShowTemplate(null, 'waiter');
+		launch: function() {
+			YEM.Interface.ShowTemplate(null, 'waiter');
+			self.showNameScreen();
+		},
+
+		// étape 1
+
+		showNameScreen: function() {
 
 			$('#speech_surname').click(function() { //ou autre évènement qui lance le process
 				// étape 1
@@ -31,17 +37,25 @@ var YEM = YEM || {}; //Namespace
 				//on crée un utilisateur pour stocker ses infos
 				self.customer = new YEM.User();
 				
-				YEM.Cyril.listenTo('surname', self.saveNameAndGoToQuestions);
+				YEM.Cyril.listenTo('surname', self.saveNameAndGoFurther);
 				//customer.id = Webservice.server('createUser');
 			});
 		},
 
-		saveNameAndGoToQuestions: function(name) {
+		saveNameAndGoFurther: function(name) {
 			self.customer.name = name;
 			YEM.Webservice.server('createUser', {'name': name}, YEM.User.prototype.setId.bind(YEM.Main.customer));
 			//prototype.x.bind : see http://joshuakehn.com/2011/10/20/Understanding-JavaScript-Context.html
 			//for little explaination
+		},
+
+		// étape 2
+
+		showKinnectScreen: function() {
+
+
 		}
+
 	};
 
 // alias
