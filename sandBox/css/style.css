@@ -140,7 +140,6 @@ input{
 	border-left: solid 1px #fff;
 	border-right: solid 1px #fff;
 	margin: 0px auto;
-	background-color: red; /* a enlever */
 }
 
 #name2{
@@ -199,9 +198,20 @@ input{
 
 #load{
 	width:83px;
-	height: 82px;
+	height: 43px;
 	background: url(../assets/img/loader.gif) no-repeat;
 	margin: 1% auto 0 auto;
 	background-size: 100%;
 }
 
+/* ------------------------------------------------------------  
+						STYLE PAGE 4	  
+   ------------------------------------------------------------ */
+
+   #cadre_rond{
+   	width: 424px;
+	height: 406px;
+	margin: 0px auto;
+	background: url(../assets/img/rond.png) no-repeat;
+	padding-bottom: 61px;
+   }
