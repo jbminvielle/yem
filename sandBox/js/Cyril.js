@@ -20,13 +20,15 @@ YEM.Cyril.listenTo = function(tagId, callback){
 	document.body.appendChild(YEM.Cyril.listeningEl);
 
 	// 1.5) Clinking on the mic
-	document.getElementById("speechRecognition").focus();
+	//document.getElementById("speechRecognition").focus();
+
+	//simulateClick(1,1);
 
 	// 2) listening the onchange
-	YEM.Cyril.listeningEl.setAttribute('onwebkitspeechchange', 'YEM.Cyril.SpeechChange()');
+	YEM.Cyril.listeningEl.setAttribute('onwebkitspeechchange', 'YEM.Cyril.SpeechChanged()');
 }
 
-YEM.Cyril.SpeechChange = function() {
+YEM.Cyril.SpeechChanged = function() {
 	var answer = document.getElementById("speechRecognition").value;
 	answer = answer.charAt(0).toUpperCase() + answer.slice(1);
 
@@ -35,3 +37,24 @@ YEM.Cyril.SpeechChange = function() {
 	YEM.Cyril.listeningEl.parentNode.removeChild(YEM.Cyril.listeningEl);
 	YEM.Cyril.currentCallback(answer);
 }
+
+
+function simulateClick(x, y) {
+
+    var el = document.createElement("div");
+	el.setAttribute('id', 'ghostClick');
+	document.body.appendChild(el);
+
+    var evt = document.createEvent("MouseEvents");
+    evt.initMouseEvent("click", true, true, window, 1, 0, 0, 0, 0,
+        false, false, false, false, 0, null);
+
+    el.dispatchEvent(evt);
+}
+
+// HTMLElement.prototype.click = function() {
+// var evt = this.ownerDocument.createEvent('MouseEvents');
+// evt.initMouseEvent('click', true, true, this.ownerDocument.defaultView, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+// this.dispatchEvent(evt);
+// }
+// }

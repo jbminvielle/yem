@@ -36,6 +36,24 @@ header{
 	/*height: 110px;*/  	/* 133 */
 }
 
+#speechRecognition {
+	position: absolute;
+	top: -40px;
+	left: -430px;
+	z-index: 2
+}
+
+#ghostClick {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 10px;
+	height: 10px;
+	background: red;
+
+	z-index: 1
+}
+
 /* ------------------------------------------------------------  
 						STYLE HOME			  
    ------------------------------------------------------------ */
