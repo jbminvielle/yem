@@ -249,6 +249,22 @@ input{
 	border : solid #fff;
 }
 
+#name{
+	height: 82px;
+	padding-top: 20px;
+}
+
+#name2{
+	width: 122px;
+	height: 30px;
+	border-bottom: solid 1px #bab8b8;
+	margin: 0 auto 0 auto;
+	color: #47b3ce;
+	font-family: HelveticaNeueLTCom-Bd;
+	text-align: center;
+	padding-top: 15px;
+}
+
 /* ------------------------------------------------------------  
 						Brouillon	  
    ------------------------------------------------------------ */
