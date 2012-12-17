@@ -36,6 +36,27 @@ header{
 	/*height: 110px;*/  	/* 133 */
 }
 
+input{
+	width: 474px;
+	height: 80px;
+	background-color: transparent;
+	border-color: transparent;
+	color: #87be2f;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 48pt;
+	text-align: center;
+}
+
+#logo{
+	width: 125px;
+	height: 100px;
+	margin-top: 2.2%;
+	margin-left: auto;
+	margin-right: auto;
+	background: url(../assets/img/logo.png) no-repeat;
+	background-size: 100%;
+}
+
 #speechRecognition {
 	position: absolute;
 	top: -40px;
@@ -66,8 +87,11 @@ header{
 	color: #f8f8fb;
 	font-size: 15pt;
 	text-align: center;
-	margin: 6% auto 0 auto;
-	font-family: HelveticaNeueLTCom-Roman;
+	margin: 8% auto 0 auto;
+	font-family: HelveticaNeueLTCom-Roman;	
+	border:solid #b0afaf;
+	border-width: 1px 0 1px 0;
+	padding: 15px 0 15px 0;
 }
 
 
@@ -82,8 +106,8 @@ header{
 }
 
 #start{
-	width: 400px;
-	height: 89px;
+	width: 450px;
+	height: 90px;
 	border: solid 1px #292930;
 	color: #87be2f;
 	font-family: HelveticaNeueLTCom-Bd;
@@ -98,31 +122,14 @@ header{
 	/*margin-top: 20px;*/
 }
 
-input{
-	width: 474px;
-	height: 80px;
-	background-color: transparent;
-	border-color: transparent;
-	color: #87be2f;
-	font-family: HelveticaNeueLTCom-Bd;
-	font-size: 48pt;
-	text-align: center;
-}
+
 
 /* ------------------------------------------------------------  
-						STYLE PAGE 2	  
+						STYLE PAGE 1 DEMARRAGE 
    ------------------------------------------------------------ */
 
 
-#logo{
-	width: 125px;
-	height: 100px;
-	margin-top: 2.2%;
-	margin-left: auto;
-	margin-right: auto;
-	background: url(../assets/img/logo.png) no-repeat;
-	background-size: 100%;
-}
+
 
 #cadre_video{
 	width: 635px;
@@ -132,6 +139,22 @@ input{
 	border-left: solid 1px #fff;
 	border-right: solid 1px #fff;
 	margin: 0px auto;
+}
+
+#in{
+	width: 635px;
+	height: 82px;
+	border: solid 1px #fff;
+	color: #87be2f;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 48pt;
+	text-align: center;
+	margin: 6% auto;
+}
+
+#name{
+	height: 82px;
+	/*margin-top: 20px;*/
 }
 
 #name2{
