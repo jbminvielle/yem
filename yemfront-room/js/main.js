@@ -22,14 +22,14 @@ var YEM = YEM || {}; //Namespace
 		customer: null,
 
 		launch: function() {
-			//YEM.Interface.ShowTemplate(null, 'waiter');
+			YEM.Interface.ShowTemplate(null, 'veille');
 			self.showNameScreen();
 
 			//dev
-			self.customer = new YEM.User();
-			self.customer.name = 'jbé';
-			self.customer.id =  10;
-			self.openQuestionForm(null);
+			// self.customer = new YEM.User();
+			// self.customer.name = 'jbé';
+			// self.customer.id =  10;
+			// self.openQuestionForm(null);
 
 		},
 
@@ -39,7 +39,7 @@ var YEM = YEM || {}; //Namespace
 
 			$('body').ready(function() { //ou autre évènement qui lance le process
 				// étape 1
-				YEM.Interface.ShowTemplate(null, 'formNom');
+				YEM.Interface.ShowTemplate(null, 'presentation');
 
 				//on crée un utilisateur pour stocker ses infos
 				self.customer = new YEM.User();

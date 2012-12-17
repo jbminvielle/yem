@@ -4,20 +4,20 @@ YEM.Webservice = new Object();
 
 YEM.Webservice.get = function(url, params, callback){
 
-		$.ajax({ 
-			url: url,
-			data: params,
-			success: function(data){
-				try {
-					result = JSON.parse(data);
-				}
-				catch(err) {
-					result = data;
-				}
-				callback(result);
+	$.ajax({ 
+		url: url,
+		data: params,
+		success: function(data){
+			try {
+				result = JSON.parse(data);
 			}
-		});
-	};
+			catch(err) {
+				result = data;
+			}
+			callback(result);
+		}
+	});
+};
 
 YEM.Webservice.kinect = function(serviceName, callback){
 
