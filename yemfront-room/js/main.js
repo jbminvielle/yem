@@ -52,6 +52,8 @@ var YEM = YEM || {}; //Namespace
 		},
 
 		saveNameAndGoFurther: function(name) {
+			$('#phrasePrenom>span').hide();
+			$('#phrasePrenom>input').show();
 			self.customer.name = name;
 			YEM.Webservice.server('createUser', {'name': name}, YEM.User.prototype.setId.bind(YEM.Main.customer));
 			//prototype.x.bind : see http://joshuakehn.com/2011/10/20/Understanding-JavaScript-Context.html
