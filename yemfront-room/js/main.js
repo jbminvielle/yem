@@ -1,5 +1,6 @@
 //var i=2;
-const WAITINGTIME = 2*1000
+const WAITINGTIME = 3*1000;
+const ACQUISITIONTIME = 6*1000;
 
 // $("#reponse").change(function(){
 //   //user.humeur = Webservice.kinect();
@@ -21,7 +22,7 @@ var YEM = YEM || {}; //Namespace
 	YEM.Main = {
 		customer: null,
 
-		// slide 1 : écran de veille
+		// slide 0 : écran de veille
 
 		launch: function() {
 			YEM.Interface.ShowTemplate(null, 'veille');
@@ -35,7 +36,7 @@ var YEM = YEM || {}; //Namespace
 
 		},
 
-		// slide 2 : démarrage
+		// slide 1 : démarrage
 
 		showNameScreen: function() {
 
@@ -60,12 +61,22 @@ var YEM = YEM || {}; //Namespace
 			//for little explaination
 			setTimeout(function() {
 				//todo change this when the part of scenario will be done
-				self.openQuestionForm();
+				self.launchKinectAcquisition();
 			}, WAITINGTIME);
 			
 		},
 
-		//il manque des étapes ici
+		// slide 2 : acquisition
+
+		launchKinectAcquisition: function() {
+			YEM.Interface.ShowTemplate({name: self.customer.name}, 'acquisition');
+
+			setTimeout(function() {
+				//todo change this when the part of scenario will be done
+				self.openQuestionForm();
+			}, ACQUISITIONTIME);
+
+		},
 
 		openQuestionForm: function(firstQuestions) {
 			if(!firstQuestions) firstQuestions = YEM.Webservice.server('getInitialQuestion', {'user_id': self.customer.id}, YEM.Main.checkNewQuestion);
