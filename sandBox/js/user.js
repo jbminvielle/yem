@@ -5,9 +5,8 @@ YEM.User= function() {
 	this.ID;
 	this.name;
 	this.surname;
-	this.questionsAnswered;
-	this.answers;
-	this.states;
+	this.questionsAnswered = [];
+	this.states = [];
 }
 
 YEM.User.prototype.getAnswer = function(){

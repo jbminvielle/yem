@@ -51,6 +51,22 @@ function action_createUser($array) {
 	else return $id;
 }
 
+function action_getInitialQuestion($request) {
+	//verify if every needed args are present :
+	if(!isset($request['user_id'])) return false;
+
+	openSQLBase();
+
+	$qAndR = getNewQuestion([], $request['user_id'], []);
+	$result= array('status'=> 'newQuestion',
+				'question_content'=> $qAndR['question_content'],
+				'question_id'=> $qAndR['question_id'],
+				'answers'=>$qAndR['answers'],
+			);
+
+	return $result;
+}
+
 function action_sendAnswer($request) {
 	//verify if every needed args are present :
 	if(!isset($request['user_id']) || !isset($request['question_id']) || !isset($request['answer_id']) || !isset($request['questionsAlreadyAsked'])) return false;
@@ -215,8 +231,7 @@ function getNewQuestion($states, $userId, $questionsAlreadyAsked) {
 
 	//now getting responses associated with the selected question
 	$answers = array();
-	echo 'SELECT id, content FROM yem_answer WHERE idQuestion='.$result['question_id'];
-	$sqlData = mysql_query('SELECT id, content FROM yem_answer WHERE idQuestion='.$result['question_id']) or die(mysql_error());
+	$sqlData = mysql_query('SELECT id, content FROM yem_answer WHERE idQuestion='.$result['question_id']);
 	while($r = mysql_fetch_assoc($sqlData)) {
 		$answers[] = array('id'=>$r['id'], 'content'=>mb_convert_encoding($r['content'], "UTF-8", "ASCII"));
 	}
@@ -227,19 +242,22 @@ function getNewQuestion($states, $userId, $questionsAlreadyAsked) {
 }
 
 function getRandQuestion($questionsAlreadyAsked) {
+	$result = array();
 	//get first question in BDD not asked :
 
 	//translate questions already asked for WHERE SQL statement
 	$WHERE = '';
+
+	if(count($questionsAlreadyAsked)>0) $WHERE .= 'WHERE ';
 	foreach ($questionsAlreadyAsked as $i => $id) {
 		$WHERE .= 'id != '.$id;
 		if($i+1<count($questionsAlreadyAsked)) $WHERE .= ' AND ';
 	}
 
-	$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q WHERE '.$WHERE.' LIMIT 1');
+	$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q '.$WHERE.' LIMIT 1');
 	while($r = mysql_fetch_assoc($sqlData)) {
 		$result['question_id'] = $r['id'];
-		$result['question_content'] = ($r['content']);
+		$result['question_content'] = mb_convert_encoding($r['content'], "UTF-8", "ASCII");
 	}
 	return $result;
 }
