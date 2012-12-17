@@ -24,6 +24,13 @@ var YEM = YEM || {}; //Namespace
 		launch: function() {
 			//YEM.Interface.ShowTemplate(null, 'waiter');
 			self.showNameScreen();
+
+			//dev
+			self.customer = new YEM.User();
+			self.customer.name = 'jbé';
+			self.customer.id =  10;
+			self.openQuestionForm(null);
+
 		},
 
 		// étape 1
@@ -67,7 +74,8 @@ var YEM = YEM || {}; //Namespace
 			self.customer.questionsAnswered.push(question);
 
 			//render it
-			YEM.Interface.ShowTemplate({id: question.id, question: question.name, name: self.customer.name}, 'question');
+			alert(JSON.stringify(servQuestion));
+			YEM.Interface.ShowTemplate({'id': question.id, 'question': question.name, 'name': self.customer.name}, 'question');
 		}	
 
 	};
