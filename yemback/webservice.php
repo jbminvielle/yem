@@ -284,7 +284,7 @@ function getRandQuestion($questionsAlreadyAsked) {
 		if($i+1<count($questionsAlreadyAsked)) $WHERE .= ' AND ';
 	}
 
-	$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q '.$WHERE.' LIMIT 1');
+	$sqlData = mysql_query('SELECT Q.content, Q.id FROM yem_question Q '.$WHERE.' ORDER BY Q.id ASC LIMIT 1');
 	while($r = mysql_fetch_assoc($sqlData)) {
 		$result['question_id'] = $r['id'];
 		$result['question_content'] = mb_convert_encoding($r['content'], "UTF-8", "ASCII");
