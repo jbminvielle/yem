@@ -141,7 +141,7 @@ function calculateFeelings($userId) {
 	while($r = mysql_fetch_assoc($sqlData)) {
 		array_push($feelings, array(
 			'id'=>$r['id'],
-			'name'=>$r['name'],
+			'name'=>mb_convert_encoding($r['name'], "UTF-8", "ASCII"),
 			'animation'=>json_decode($r['characteristics'])));
 	}
 	return $feelings;
@@ -162,11 +162,27 @@ function getMeats($feelings) {
 
 	$meats = array();
 
+	// we have to get all meats
+
+	$sqlData = mysql_query('SELECT M.id, M.name, M.description, M.picture, M.price, M.type FROM yem_meat M, yem_meat_type WHERE M.id=MF.idMeat AND MF.idFeeling='.$feeling['id']);
+	while($r = mysql_fetch_assoc($sqlData)) {
+		$meats[$r['id']] = array(
+					'id'=> $r['id'],
+					'description'=> mb_convert_encoding($r['description'], "UTF-8", "ASCII"), 
+					'picture'=> mb_convert_encoding($r['picture'], "UTF-8", "ASCII"),
+					'price'=> mb_convert_encoding($r['price'], "UTF-8", "ASCII"),
+					'type'=> mb_convert_encoding($r['type'], "UTF-8", "ASCII")
+			);
+		$meats[$r['id']]['points'] = 0;
+	}
+
+
+	// and organise them by relevance
 	foreach ($feelings as $feeling) {
-		$sqlData = mysql_query('SELECT M.id, M.name, M.description, M.picture, M.price FROM yem_meat M, yem_meat_gives_feeling MF WHERE M.id=MF.idMeat AND MF.idFeeling='.$feeling['id']);
+		$sqlData = mysql_query('SELECT M.id FROM yem_meat M, yem_meat_gives_feeling MF WHERE M.id=MF.idMeat AND MF.idFeeling='.$feeling['id']);
 
 		while($r = mysql_fetch_assoc($sqlData)) {
-			array_push($meats, $r);
+			$meats[$r['id']]['points'] ++;
 		}
 		/*
 		$meats = [
@@ -176,10 +192,22 @@ function getMeats($feelings) {
 				"price": "x€",
 				"description": "lorem ipsum",
 				"picture": "kikou.jpeg",
+				"points": x
 			}
 		]
 		*/
 	}
+
+	// Obtain a list of columns
+	foreach ($meats as $key => $row) {
+		$points[$key]  	= $row['points'];
+		$id[$key] 		= $key;
+	}
+
+	// Sort the data with volume descending, edition ascending
+	// Add $data as the last parameter, to sort by the common key
+	array_multisort($points, SORT_DESC, $id, SORT_ASC, $meats);
+
 	return $meats;
 }
 
