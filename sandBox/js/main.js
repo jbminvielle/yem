@@ -1,5 +1,5 @@
 //var i=2;
-const WAITINGTIME = 5*1000
+const WAITINGTIME = 2*1000
 
 // $("#reponse").change(function(){
 //   //user.humeur = Webservice.kinect();
@@ -48,16 +48,27 @@ var YEM = YEM || {}; //Namespace
 			//prototype.x.bind : see http://joshuakehn.com/2011/10/20/Understanding-JavaScript-Context.html
 			//for little explaination
 			setTimeout(function() {
-				self.showKinnectScreen();
+				//todo change this when the part of scenario will be done
+				self.openQuestionForm();
 			}, WAITINGTIME);
 			
 		},
 
-		// étape 2
+		//il manque des étapes ici
 
-		showKinnectScreen: function() {
-			YEM.Interface.ShowTemplate(null, 'resultatScan');
-		}
+		openQuestionForm: function(firstQuestions) {
+			if(!firstQuestions) firstQuestions = YEM.Webservice.server('getInitialQuestion', {'user_id': self.customer.id}, YEM.Main.checkNewQuestion);
+			else YEM.Main.checkNewQuestion(firstQuestions);
+		},
+
+		checkNewQuestion: function(servQuestion) {
+			//save it
+			var question = {'name': servQuestion.question_name, 'id': servQuestion.question_id, 'answers': servQuestion.answers};
+			self.customer.questionsAnswered.push(question);
+
+			//render it
+			YEM.Interface.ShowTemplate({id: question.id, question: question.name, name: self.customer.name}, 'question');
+		}	
 
 	};
 

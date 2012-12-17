@@ -14,6 +14,15 @@
 		Params 	: [ STRING name]
 		Returns	: INT userId
 
+	2) "getInitialQuestion" 
+		Params	: [INT user_id]
+		Returns : {
+					STRING status = "newQuestion",
+					STRING question_content,
+					INT question_id,
+					ARRAY answers = [{INT id, STRING content}, {...}, ...],
+				  }
+
 	2) "sendAnswer"
 		Params	: [
 					INT user_id,
