@@ -21,6 +21,8 @@ var YEM = YEM || {}; //Namespace
 	YEM.Main = {
 		customer: null,
 
+		// slide 1 : écran de veille
+
 		launch: function() {
 			YEM.Interface.ShowTemplate(null, 'veille');
 			self.showNameScreen();
@@ -33,12 +35,12 @@ var YEM = YEM || {}; //Namespace
 
 		},
 
-		// étape 1
+		// slide 2 : démarrage
 
 		showNameScreen: function() {
 
-			$('body').ready(function() { //ou autre évènement qui lance le process
-				// étape 1
+			$('#start').click(function() { //ou autre évènement qui lance le process
+
 				YEM.Interface.ShowTemplate(null, 'presentation');
 
 				//on crée un utilisateur pour stocker ses infos
