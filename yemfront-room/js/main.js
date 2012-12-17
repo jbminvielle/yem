@@ -41,7 +41,7 @@ var YEM = YEM || {}; //Namespace
 
 			$('#start').click(function() { //ou autre évènement qui lance le process
 
-				YEM.Interface.ShowTemplate(null, 'presentation');
+				YEM.Interface.ShowTemplate(null, 'demarrage');
 
 				//on crée un utilisateur pour stocker ses infos
 				self.customer = new YEM.User();
