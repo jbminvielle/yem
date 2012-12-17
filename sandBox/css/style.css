@@ -56,31 +56,21 @@ header{
 
 
 /* ------------------------------------------------------------  
-						STYLE HOME			  
+						STYLE PAGE 0 VEILLE		  
    ------------------------------------------------------------ */
 
-#logoHome{              
-	width: 223px;
-	height: 133px;
-	margin-top: 5.5%;
-	margin-left: auto;
-	margin-right: auto;
-	background: url(../assets/img/logo.png) no-repeat;
-}
 
-
-#text{
+#BlocText{
 	width: 485px;
-	height: 170px;
-	border-top: solid 1px #b0afaf;
-	border-bottom: solid 1px #bab8b8;
+	height: 100%;
 	color: #f8f8fb;
-	font-family: HelveticaNeueLTCom-Roman;
-	font-size: 10.5pt;
+	font-size: 15pt;
 	text-align: center;
-	margin: 4% auto;
-	padding: 8px 0 4px;
+	margin: 6% auto 0 auto;
+	font-family: HelveticaNeueLTCom-Roman;
 }
+
+
 
 #enter{
 	height:20px;
@@ -88,18 +78,19 @@ header{
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 11pt;
 	text-align: center;
-	margin: 0% auto;
+	margin: auto;
 }
 
-#in{
-	width: 635px;
-	height: 82px;
-	border: solid 1px #fff;
+#start{
+	width: 400px;
+	height: 89px;
+	border: solid 1px #292930;
 	color: #87be2f;
 	font-family: HelveticaNeueLTCom-Bd;
-	font-size: 48pt;
+	font-size: 15pt;
 	text-align: center;
-	margin: 6% auto;
+	margin: 125px auto 0 auto;
+	background: url(../assets/img/fond_button.png);
 }
 
 #name{
@@ -277,3 +268,4 @@ input{
 	height: 42px;
 	margin: 1% auto 0 auto;
 }
+
