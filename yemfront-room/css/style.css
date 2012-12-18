@@ -146,6 +146,7 @@ input{
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 48pt;
 	text-align: center;
+	padding-left: 50px;
 }
 
 .logo{
@@ -162,7 +163,7 @@ input{
 	position: absolute;
 	top: -40px;
 	left: -430px;
-	z-index: 2
+	z-index: 2;
 }
 
 #ghostClick {
@@ -475,6 +476,104 @@ input{
 	float: right;
 }
 	
+
+/* ------------------------------------------------------------  
+			 PAGE 6 RESULTAT QUESTIONNAIRE  
+   ------------------------------------------------------------ */
+
+#espace_video{
+	width: 600px;
+	height: 250px;
+	color: #fff;
+	font-family: HelveticaNeueLTCom-Roman;
+	font-size: 13pt;
+	text-align: center;
+	margin: auto;
+	border-width: 1px 1px 1px 1px;
+	border : solid #fff;
+}
+
+#slider_plat{
+	width: 300px;
+	height: 120px;
+	border: solid #bab8b8;
+	border-width: 1px 1px 1px 1px;
+	margin: 1% auto 0 auto;
+	color: #47b3ce;
+	font-family: HelveticaNeueLTCom-Bd;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#phrase_proposition{
+	width: 250px;
+	font-family: HelveticaNeueLTCom-Bd;
+	margin: 1% auto 0 auto;
+	text-align: center;
+}
+
+/* ------------------------------------------------------------  
+			 PAGE 7 FIN DE L EXPERIENCE  
+   ------------------------------------------------------------ */
+
+#espace_menu{
+	width: 500px;
+	height: 250px;
+	color: #fff;
+	text-align: center;
+	margin: auto;
+}
+
+.elmt_menu{
+	color: #17d4c5;
+	font-size: 18pt;
+	font-family: HelveticaNeueLTCom-LtCn;
+	margin-top: 20px;
+}
+
+.menu_variable{
+	width: 300px;
+	height: 40px;
+	font-family:HelveticaNeueLTCom-LtCn;
+	margin: auto;
+}
+
+#merci{
+	width: 300px;
+	height: 120px;
+	margin-top: 3%;
+	margin-left: 25%;
+	color: #17d4c5;
+	font-family: HelveticaNeueLTCom-Bd;
+	text-align: center;
+	padding-top: 15px;
+	float: left;
+}
+
+#trait{
+	width: 124px;
+	height: 4px;
+	margin: 3% auto 0 auto;
+	background-color: #777777;
+}
+
+#serveur{
+	width: 142px;
+	height: 155px;
+	margin-right: 30%;
+	margin-top: 3%;
+	float: right;
+	background: url(../assets/img/serveur.jpg) no-repeat;
+	background-size: 90%;
+}
+
+#phrase_proposition{
+	width: 250px;
+	font-family: HelveticaNeueLTCom-Bd;
+	margin: 1% auto 0 auto;
+	text-align: center;
+}
+
 
 /* ------------------------------------------------------------  
 						Brouillon	  

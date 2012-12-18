@@ -27,11 +27,5 @@ YEM.Interface.ShowTemplate = function(jsonobj, template, templcallback ){
 				templcallback();
 			}, 500)
 		}, 500)
-
-
-
-
-   		
-   		
 }
 

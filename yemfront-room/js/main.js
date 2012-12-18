@@ -1,6 +1,6 @@
 //var i=2;
 const WAITINGTIME = 3*1000;
-const ACQUISITIONTIME = 6*1000;
+const FULLWAITINGTIME = 10*1000;
 
 // $("#reponse").change(function(){
 //   //user.humeur = Webservice.kinect();
@@ -37,7 +37,6 @@ var YEM = YEM || {}; //Namespace
 			// self.customer.name = 'jbé';
 			// self.customer.id =  10;
 			// self.openQuestionForm(null);
-
 		},
 
 		// slide 1 : démarrage
@@ -97,15 +96,20 @@ var YEM = YEM || {}; //Namespace
 		//slide 3 : Interpretation
 
 		openIntepretation: function(data) {
+
 			YEM.Interface.ShowTemplate({'name': self.customer.name}, 'interpretation', setTimeout(function() {
 					//todo change this when the part of scenario will be done
-					self.openIntepretation();
-				}, WAITINGTIME);
+					self.openIntroduction();
+				}, FULLWAITINGTIME);
 			);
 			
 		},
 
 		//slide 4 : Introduction
+		openIntroduction: function(data) {
+			YEM.Interface.ShowTemplate(data, 'transition_introduction');
+		},
+
 		//slide 5 : Questionnaire
 
 		openQuestionForm: function(firstQuestions) {
@@ -122,13 +126,14 @@ var YEM = YEM || {}; //Namespace
 			self.customer.activeQuestion = question.id;
 
 			//render it
-			YEM.Interface.ShowTemplate({'id': question.id, 'question': question.name, 'name': self.customer.name, 'answers': question.answers}, 'question', YEM.Cyril.listenTo(null, self.analyseAudioAnswer) );
+
+			YEM.Interface.ShowTemplate({'id': question.id, 'question': question.name, 'name': self.customer.name, 'answers': question.answers}, 'questionnaire', YEM.Cyril.listenTo(null, self.analyseAudioAnswer) );
 
 			//listen to answer :
 			
 		},
 		analyseAudioAnswer: function(audioAnswer) {
-			var answerAnswered;
+			var answerAnswered = null;
 			var distances = {}; // the smaller the better;
 
 			//log what we heard, for the lulz :
@@ -161,12 +166,12 @@ var YEM = YEM || {}; //Namespace
 			}
 			//to understand if it failed :
 			console.log(distances);
-			if(distances != []) {
+			if(distances != [] && answerAnswered === null) {
 				var sortable = [];
 				for (var distance in distances) sortable.push([distance, distances[distance]])
 				sortable.sort(function(a, b) {return a[1] - b[1]});
 
-				
+				console.log(sortable)
 				//look for this answer :
 				for (i in self.customer.questionsAnswered[self.customer.activeQuestion].answers)
 					if(sortable[0][0] == self.customer.questionsAnswered[self.customer.activeQuestion].answers[i].id) {
@@ -188,11 +193,23 @@ var YEM = YEM || {}; //Namespace
 			if(data.status=="newQuestion") self.checkNewQuestion(data);
 			else //data = end
 				console.log(data.meats);
+		},
+
+
+		// slide 6 : Résultat
+		showResults: function(meats) {
+			YEM.Interface.ShowTemplate(null, 'resultat');
+
+			$('#slider_plat img').click(function() {
+				self.saveMeat($(this).attr('data-id'));
+			});
+		},
+
+		saveMeat: function () {
+			YEM.Webservice.server('sendAnswer', {'user_id': self.customer.id}, YEM.Main.showRecap);
 		}
 
-
-		//slide 6 : Résultat
-		//slide 7 : Menu
+		// slide 7 : Menu
 
 
 	};
@@ -201,73 +218,3 @@ var YEM = YEM || {}; //Namespace
 var self = YEM.Main;
 
 YEM.Main.launch();
-
-
-// 	// étape 2
-// 	Interface.playStreaming();
-
-// 	// on dit à l'interface de lire le flux vidéo de la kinect
-// 	currentUser.humeur = Webservice.kinect('launchAcquisition');
-
-// 	// on récupère ce que pond l'algo de la kinect comme humeur
-// 	// simplifié hein (obligatoirement synchrone si on fait ça)
-
-// 	var reactionServerToUser = [];
-
-// 	var i = 0;
-
-// 	reactionServerToUser[0] = Webservice.server('saveHumeur', {'humeur': currentUser.humeur});
-
-// 	Interface.stopStreaming();
-
-// 	//étape 3 : un boucle qui s'execute au moins une fois
-
-// 	Do {
-
-// 	var servResp = reactionServerToUser[i];
-
-// 	//styliser l'écran avec reactionServerToHumeur.style ?
-
-// 	Interface.template('titre', servResp.title);
-
-// 	Interface.template('question', servResp.question);
-
-// 	{...}
-
-// 	// normalement un bon moteur de template on devrait pouvoir
-
-// 	// faire “Interface.template(servResp);”
-
-// 	//get reponse text with speak I/O
-
-// 	currentUser.reponse[i] = Cyril.listen();
-
-// 	//on envoie la réponse du user et on stocke la réponse du
-
-// 	//serv dans la prochaine reactionServerToUser
-
-// 	var nextRéponseServ = Webservice.server('saveQuestion', {'réponse': currentUser.reponse[i], 'noRéponse': i});
-
-// 	reactionServerToUser[i+1] = nextRéponseServ.status;
-
-// 	i++;
-
-// 	} while (nextRéponseServ.status == 'newQuestion')
-
-// 	//étape 4
-
-// 	var lastReactionServer = reactionServerToUser[i];
-
-// 	Interface.showVideo(lastReactionServer.video);
-
-// 	Interface.showMeats(lastReactionServer.meats);
-
-// 	Interface.meat.onClick(function() {
-
-// 		Webservice.server('confirmMeat', {meat: this.id});
-
-// 		Interface.showScreen('merci');
-
-// 	});
-
-// }
