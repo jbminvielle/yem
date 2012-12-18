@@ -25,8 +25,12 @@ var YEM = YEM || {}; //Namespace
 		// slide 0 : écran de veille
 
 		launch: function() {
-			YEM.Interface.ShowTemplate(null, 'veille');
-			self.showNameScreen();
+				
+
+
+			YEM.Interface.ShowTemplate(null, 'veille', self.showNameScreen);
+
+
 
 			//dev
 			// self.customer = new YEM.User();
@@ -40,13 +44,19 @@ var YEM = YEM || {}; //Namespace
 		showNameScreen: function() {
 
 			$('#start').click(function() { //ou autre évènement qui lance le process
+				var templcallback = function(){
 
-				YEM.Interface.ShowTemplate(null, 'demarrage');
+
+					self.customer = new YEM.User();
+					
+					YEM.Cyril.listenTo('surname', self.saveNameAndGoFurther);
+				};
+
+
+				YEM.Interface.ShowTemplate(null, 'demarrage',templcallback);
 
 				//on crée un utilisateur pour stocker ses infos
-				self.customer = new YEM.User();
-				
-				YEM.Cyril.listenTo('surname', self.saveNameAndGoFurther);
+
 			});
 		},
 
@@ -67,10 +77,11 @@ var YEM = YEM || {}; //Namespace
 		// slide 2 : acquisition
 
 		launchKinectAcquisition: function() {
-			YEM.Interface.ShowTemplate({name: self.customer.name}, 'acquisition');
-
 			//launch kinect webservice
-			YEM.Webservice.kinect('getState', YEM.Main.analyseKinectAnswer);
+			YEM.Interface.ShowTemplate({name: self.customer.name}, 'acquisition', YEM.Webservice.kinect('getState', YEM.Main.analyseKinectAnswer) );
+
+			
+			;
 		},
 
 		analyseKinectAnswer: function(data) {
@@ -85,12 +96,13 @@ var YEM = YEM || {}; //Namespace
 		//slide 3 : Interpretation
 
 		openIntepretation: function(data) {
-			YEM.Interface.ShowTemplate({'name': self.customer.name}, 'interpretation');
-			YEM.Webservice.Webservice({});
-			setTimeout(function() {
+
+			YEM.Interface.ShowTemplate({'name': self.customer.name}, 'interpretation', setTimeout(function() {
 					//todo change this when the part of scenario will be done
 					self.openIntroduction();
-			}, FULLWAITINGTIME);
+				}, FULLWAITINGTIME)
+			);
+			
 		},
 
 		//slide 4 : Introduction
@@ -114,10 +126,11 @@ var YEM = YEM || {}; //Namespace
 			self.customer.activeQuestion = question.id;
 
 			//render it
-			YEM.Interface.ShowTemplate({'id': question.id, 'question': question.name, 'name': self.customer.name, 'answers': question.answers}, 'questionnaire');
+
+			YEM.Interface.ShowTemplate({'id': question.id, 'question': question.name, 'name': self.customer.name, 'answers': question.answers}, 'questionnaire', YEM.Cyril.listenTo(null, self.analyseAudioAnswer) );
 
 			//listen to answer :
-			YEM.Cyril.listenTo(null, self.analyseAudioAnswer);
+			
 		},
 		analyseAudioAnswer: function(audioAnswer) {
 			var answerAnswered = null;

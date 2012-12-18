@@ -24,6 +24,98 @@
 }
 
 
+@-webkit-keyframes Rotate {
+
+	from {-webkit-transform:rotateY(0deg);}
+	to {-webkit-transform:rotateY(90deg);}
+}
+
+
+@-webkit-keyframes Fade {
+
+	from {opacity:0.3;}
+	to {opacity:1;}
+}
+
+@-webkit-keyframes Fadein {
+
+	from {opacity:0;}
+	to {opacity:1;}
+}
+
+@-webkit-keyframes Fadeout {
+
+	from {opacity:1;}
+	to {opacity:0;}
+}
+
+@-webkit-keyframes Blink {
+
+	from {box-shadow:0px 0px 30px white;}
+	to {box-shadow:0px 0px 0px white;}
+}
+
+.rotate{
+	-webkit-animation-name: Rotate;
+	-webkit-animation-duration: 2.5s;
+	-webkit-animation-timing-function: cubic-bezier(0,0,0,0);
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+.blink{
+	-webkit-animation-name: Blink;
+	-webkit-animation-duration: 1.5s;
+	-webkit-animation-timing-function: cubic-bezier(0.3,0.1,0.9,0.7);
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+.fade{
+	-webkit-animation-name: Fade;
+	-webkit-animation-duration: 2.5s;
+	-webkit-animation-timing-function: cubic-bezier(0,0,0,0);
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+}
+
+.fadein{
+	-webkit-animation-name: Fadein;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-timing-function: cubic-bezier(0,0,0,0);
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: normal;
+}
+
+.fadeout{
+	-webkit-animation-name: Fadeout;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-timing-function: cubic-bezier(0,0,0,0);
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 html{
 	margin:0;
 	padding: 0;
@@ -123,14 +215,26 @@ input{
 
 
 #start{
+<<<<<<< HEAD
 	width: 380px;
 	height: 80px;
 	border: solid 1px #292930;
+=======
+	width: 450px;
+	height: 90px;
+	/*border: solid 1px #292930;*/
+	color: #87be2f;
+>>>>>>> 813d2d738be2aaa2584bed6c590ccee19262c9af
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 13pt;
 	text-align: center;
+<<<<<<< HEAD
 	margin: 8% auto 0 auto;
 	background: url(../assets/img/fond_button.png);
+=======
+	margin: 125px auto 0 auto;
+	/*background: url(../assets/img/fond_button.png);*/
+>>>>>>> 813d2d738be2aaa2584bed6c590ccee19262c9af
 }
 
 /* ------------------------------------------------------------  
