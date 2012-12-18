@@ -15,6 +15,15 @@
         	
 }
 
+@font-face{  
+	font-family: "HelveticaNeueLTCom-LtCn"; 
+	font-style: normal;
+	font-weight: normal;
+	src:	url('../assets/fonts/HelveticaNeueLTCom-LtCn.ttf')   
+        	
+}
+
+
 html{
 	margin:0;
 	padding: 0;
@@ -267,6 +276,63 @@ input{
 	font-family: HelveticaNeueLTCom-Bd;
 	text-align: center;
 	padding-top: 15px;
+}
+
+/* ------------------------------------------------------------  
+			 PAGE 3 INTERPRETATION DE L'ACQUISITION  
+   ------------------------------------------------------------ */
+#surpris{
+	width: 635px;
+	height: 100px;
+	color: #39bff2;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 22pt;
+	text-align: center;
+	margin: 5% auto 0 auto;
+}
+
+#text_interpretation{
+	width: 635px;
+	height: 100px;
+	color: #fff;
+	font-family: HelveticaNeueLTCom-Roman;
+	font-size: 12pt;
+	text-align: center;
+	margin: auto;
+}	
+
+/* ------------------------------------------------------------  
+			 PAGE 4 Transition/introduction au questionnaire  
+   ------------------------------------------------------------ */
+#contener_text{
+	width:635px;
+	height: 350px;
+	margin: 2% auto 0 auto;
+	text-align: center;
+	font-size: 40pt;
+}
+
+#initialisation{
+	font-family: HelveticaNeueLTCom-LtCn;
+	color: #379cb5;
+}
+
+#de{
+	font-family: HelveticaNeueLTCom-LtCn;
+	color: #f8fcfc;
+	padding-top: 25px;
+}
+
+#analyse{
+	font-family: HelveticaNeueLTCom-Bd;
+	color: #f8fcfc;
+	padding-top: 30px;
+}
+
+#sensorielle{
+	font-family:HelveticaNeueLTCom-Bd;
+	color: #a1e8e0;
+	padding-top: 30px;
 }
 
 /* ------------------------------------------------------------  
