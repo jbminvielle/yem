@@ -55,7 +55,6 @@ input{
 	font-size: 48pt;
 	text-align: center;
 	padding-left: 50px;
-	background-color: red;
 }
 
 .logo{
@@ -73,7 +72,6 @@ input{
 	top: -40px;
 	left: -430px;
 	z-index: 2;
-	background-color: green;
 }
 
 #ghostClick {
