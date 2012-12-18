@@ -1,4 +1,14 @@
+//Namespace YEM
 if(typeof YEM == 'undefined') YEM = {};
+
+/* --------------------
+
+Webservice is the Interface between webapp and both servs
+These two servers ar representated by two public functions
+calling the same internal function (kinect() & server() => get())
+
+
+----------------------- */
 
 YEM.Webservice = new Object();
 

@@ -1,5 +1,12 @@
+//Namespace YEM
 if(typeof YEM == 'undefined') YEM = {};
 
+/* --------------------
+
+Interface is the module which touch the DOM.
+Interface is mainly the interface with the templater Mustache
+
+----------------------- */
 
 YEM.Interface = new Object();
 

@@ -1,4 +1,13 @@
+//Namespace YEM
 if(typeof YEM == 'undefined') YEM = {};
+
+
+/* --------------------
+
+User is the instanciable class for users creations
+
+
+----------------------- */
 
 YEM.User= function() {
 
