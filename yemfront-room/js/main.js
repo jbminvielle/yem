@@ -100,7 +100,7 @@ var YEM = YEM || {}; //Namespace
 			YEM.Interface.ShowTemplate({'name': self.customer.name}, 'interpretation', setTimeout(function() {
 					//todo change this when the part of scenario will be done
 					self.openIntroduction();
-				}, FULLWAITINGTIME);
+				}, FULLWAITINGTIME)
 			);
 			
 		},
