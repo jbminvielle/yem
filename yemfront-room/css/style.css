@@ -95,28 +95,41 @@ input{
 	width: 485px;
 	height: 100%;
 	color: #f8f8fb;
-	font-size: 15pt;
-	text-align: center;
-	margin: 8% auto 0 auto;
-	font-family: HelveticaNeueLTCom-Roman;	
-	border:solid #b0afaf;
-	border-width: 1px 0 1px 0;
+	font-size: 24pt;
+	margin: 3% auto 0 auto;
+	font-family: HelveticaNeueLTCom-LtCn;	
 	padding: 15px 0 15px 0;
+}
+
+#une{
+	margin-left: 15%;
+	font-size: 45pt;
+}
+
+#expe{
+	margin-left: 28%;
+	font-size: 45pt;
+}
+
+#sensas{
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 28pt;
+	margin-left: 15%;
+	margin-top: 1%;
+	color: #17d4c5;
 }
 
 
 
 
-
 #start{
-	width: 450px;
-	height: 90px;
+	width: 380px;
+	height: 80px;
 	border: solid 1px #292930;
-	color: #87be2f;
 	font-family: HelveticaNeueLTCom-Bd;
-	font-size: 15pt;
+	font-size: 13pt;
 	text-align: center;
-	margin: 125px auto 0 auto;
+	margin: 8% auto 0 auto;
 	background: url(../assets/img/fond_button.png);
 }
 
