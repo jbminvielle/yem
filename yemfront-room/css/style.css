@@ -215,26 +215,13 @@ input{
 
 
 #start{
-<<<<<<< HEAD
 	width: 380px;
 	height: 80px;
-	border: solid 1px #292930;
-=======
-	width: 450px;
-	height: 90px;
-	/*border: solid 1px #292930;*/
-	color: #87be2f;
->>>>>>> 813d2d738be2aaa2584bed6c590ccee19262c9af
 	font-family: HelveticaNeueLTCom-Bd;
 	font-size: 13pt;
 	text-align: center;
-<<<<<<< HEAD
 	margin: 8% auto 0 auto;
-	background: url(../assets/img/fond_button.png);
-=======
-	margin: 125px auto 0 auto;
-	/*background: url(../assets/img/fond_button.png);*/
->>>>>>> 813d2d738be2aaa2584bed6c590ccee19262c9af
+
 }
 
 /* ------------------------------------------------------------  
