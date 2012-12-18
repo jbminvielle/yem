@@ -14,7 +14,7 @@ YEM.Interface.ShowTemplate = function(jsonobj, template){
 		var templ = $("#template_"+template).html();
 
     	var html = Mustache.to_html(templ, jsonobj);
-    	$('#screen').remove;
+    	//$('#screen').remove;
    		$('#screen').html(html);
 }
 
