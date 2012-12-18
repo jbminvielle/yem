@@ -116,7 +116,7 @@ var YEM = YEM || {}; //Namespace
 			YEM.Cyril.listenTo(null, self.analyseAudioAnswer);
 		},
 		analyseAudioAnswer: function(audioAnswer) {
-			var answerAnswered;
+			var answerAnswered = null;
 			var distances = {}; // the smaller the better;
 
 			//log what we heard, for the lulz :
@@ -149,12 +149,12 @@ var YEM = YEM || {}; //Namespace
 			}
 			//to understand if it failed :
 			console.log(distances);
-			if(distances != []) {
+			if(distances != [] && answerAnswered === null) {
 				var sortable = [];
 				for (var distance in distances) sortable.push([distance, distances[distance]])
 				sortable.sort(function(a, b) {return a[1] - b[1]});
 
-				
+				console.log(sortable)
 				//look for this answer :
 				for (i in self.customer.questionsAnswered[self.customer.activeQuestion].answers)
 					if(sortable[0][0] == self.customer.questionsAnswered[self.customer.activeQuestion].answers[i].id) {
