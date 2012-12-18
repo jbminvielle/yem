@@ -385,6 +385,41 @@ input{
 	
 
 /* ------------------------------------------------------------  
+			 PAGE 6 RESULTAT QUESTIONNAIRE  
+   ------------------------------------------------------------ */
+
+#espace_video{
+	width: 600px;
+	height: 250px;
+	color: #fff;
+	font-family: HelveticaNeueLTCom-Roman;
+	font-size: 13pt;
+	text-align: center;
+	margin: auto;
+	border-width: 1px 1px 1px 1px;
+	border : solid #fff;
+}
+
+#slider_plat{
+	width: 300px;
+	height: 120px;
+	border: solid #bab8b8;
+	border-width: 1px 1px 1px 1px;
+	margin: 1% auto 0 auto;
+	color: #47b3ce;
+	font-family: HelveticaNeueLTCom-Bd;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#phrase_proposition{
+	width: 250px;
+	font-family: HelveticaNeueLTCom-Bd;
+	margin: 1% auto 0 auto;
+	text-align: center;
+}
+
+/* ------------------------------------------------------------  
 						Brouillon	  
    ------------------------------------------------------------ */
 
