@@ -270,6 +270,28 @@ input{
 }
 
 /* ------------------------------------------------------------  
+			 PAGE 3 INTERPRETATION DE L'ACQUISITION  
+   ------------------------------------------------------------ */
+#surpris{
+	width: 635px;
+	height: 100px;
+	color: #39bff2;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 22pt;
+	text-align: center;
+	margin: 5% auto 0 auto;
+}
+
+#text_interpretation{
+	width: 635px;
+	height: 100px;
+	color: #fff;
+	font-family: HelveticaNeueLTCom-Roman;
+	font-size: 12pt;
+	text-align: center;
+	margin: auto;
+}
+/* ------------------------------------------------------------  
 						Brouillon	  
    ------------------------------------------------------------ */
 
