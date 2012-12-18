@@ -356,6 +356,7 @@ input{
 	width: 635px;
 	height:270px;
 	margin: 3% auto 0 auto;
+	text-align: center;
 }
 
 .encadrementQuestion{
@@ -367,6 +368,7 @@ input{
 	text-align: center;
 	font-family: HelveticaNeueLTCom-Roman;
 	padding-top: 20px;
+	display: inline-block;
 }
 
 #reponse_groupe_gauche{
@@ -380,6 +382,7 @@ input{
 	width: 305px;
 	float: right;
 }
+	
 
 /* ------------------------------------------------------------  
 						Brouillon	  
