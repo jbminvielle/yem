@@ -166,7 +166,6 @@ function getMeats($feelings) {
 
 	$sqlData = mysql_query('SELECT M.id, M.name, M.description, M.picture, M.price, MT.name AS type FROM yem_meat M, yem_meat_type MT WHERE M.idType=MT.id');
 	while($r = mysql_fetch_assoc($sqlData)) {
-		echo $r['id'];
 		$meats[$r['id']] = array(
 					'id'=> $r['id'],
 					'description'=> mb_convert_encoding($r['description'], "UTF-8", "ASCII"), 
@@ -176,8 +175,6 @@ function getMeats($feelings) {
 			);
 		$meats[$r['id']]['points'] = 0;
 	}
-
-	print_r($meats);
 
 	// and organise them by relevance
 	foreach ($feelings as $feeling) {

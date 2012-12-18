@@ -13,7 +13,6 @@ calling the same internal function (kinect() & server() => get())
 YEM.Webservice = new Object();
 
 YEM.Webservice.get = function(url, params, callback){
-
 	$.ajax({ 
 		url: url,
 		data: params,

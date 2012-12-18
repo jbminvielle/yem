@@ -106,6 +106,7 @@ var YEM = YEM || {}; //Namespace
 			//save it into user !
 			var question = {'name': servQuestion.question_content, 'id': servQuestion.question_id, 'answers': servQuestion.answers};
 			self.customer.questionsAnswered[question.id] = question;
+			self.customer.questionsAnsweredIds.push(question.id);
 			self.customer.activeQuestion = question.id;
 
 			//render it
@@ -116,7 +117,10 @@ var YEM = YEM || {}; //Namespace
 		},
 		analyseAudioAnswer: function(audioAnswer) {
 			var answerAnswered;
-			var distances; // the smaller the better;
+			var distances = {}; // the smaller the better;
+
+			//log what we heard, for the lulz :
+			console.log(audioAnswer);
 
 			// for each possible answers
 			for(i in self.customer.questionsAnswered[self.customer.activeQuestion].answers) {
@@ -128,11 +132,9 @@ var YEM = YEM || {}; //Namespace
 					break;
 				}
 				// Test 2 : test distance :
-				var dist = YEM.Cyril.damerauLevenshteinDistance(audioAnswer,r.content)
-
+				distances[r.id] = YEM.Cyril.damerauLevenshteinDistance(audioAnswer,r.content)
 
 				//var wordsAudio = audioAnswer.split(' ');
-
 
 				//for each word in Audio 
 				// for (i in wordsAudio) {
@@ -144,10 +146,36 @@ var YEM = YEM || {}; //Namespace
 				// 	}
 				// }
 				// if(answerAnswered != null) break;
-
 			}
+			//to understand if it failed :
+			console.log(distances);
+			if(distances != []) {
+				var sortable = [];
+				for (var distance in distances) sortable.push([distance, distances[distance]])
+				sortable.sort(function(a, b) {return a[1] - b[1]});
 
-			if(answerAnswered != null) alert(JSON.stringify(answerAnswered));
+				
+				//look for this answer :
+				for (i in self.customer.questionsAnswered[self.customer.activeQuestion].answers)
+					if(sortable[0][0] == self.customer.questionsAnswered[self.customer.activeQuestion].answers[i].id) {
+						answerAnswered = self.customer.questionsAnswered[self.customer.activeQuestion].answers[i];
+						break;
+					}
+			}
+			//what we keeped :
+			console.log(answerAnswered);
+
+			//send this response
+			YEM.Webservice.server('sendAnswer', {'user_id': self.customer.id,
+												'question_id': self.customer.activeQuestion,
+												'answer_id':  answerAnswered.id,
+												'questionsAlreadyAsked': self.customer.questionsAnsweredIds}, YEM.Main.analyseResponseFromSendAnswser);
+		},
+
+		analyseResponseFromSendAnswser: function(data){
+			if(data.status=="newQuestion") self.checkNewQuestion(data);
+			else //data = end
+				console.log(data.meats);
 		}
 
 

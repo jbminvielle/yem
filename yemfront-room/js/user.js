@@ -15,6 +15,7 @@ YEM.User= function() {
 	this.name;
 	this.surname;
 	this.questionsAnswered = [];
+	this.questionsAnsweredIds = [];
 	this.states = [];
 }
 
