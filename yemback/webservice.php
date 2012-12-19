@@ -57,7 +57,7 @@ function action_getInitialQuestion($request) {
 
 	openSQLBase();
 
-	$qAndR = getNewQuestion([], $request['user_id'], []);
+	$qAndR = getNewQuestion(array(), $request['user_id'], array());
 	$result= array('status'=> 'newQuestion',
 				'question_content'=> $qAndR['question_content'],
 				'question_id'=> $qAndR['question_id'],
