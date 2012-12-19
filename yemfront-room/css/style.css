@@ -451,7 +451,7 @@ input{
 }
 
 /* ------------------------------------------------------------  
-			 PAGE 5 Transition/introduction au questionnaire  
+			 PAGE 5 questionnaire  
    ------------------------------------------------------------ */
 
 #question_variable{
@@ -478,10 +478,9 @@ input{
 	width:250px;
 	height: 50px;
 	margin: 40px auto 0 auto;
-	border: solid #379cb5;
-	border-width: 1px 1px 1px 1px;
 	text-align: center;
-	font-family: HelveticaNeueLTCom-Roman;
+	font-family: Andrade Pro Swashes;
+	color: #a1e8e0;
 	padding-top: 20px;
 	display: inline-block;
 }
