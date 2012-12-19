@@ -48,8 +48,13 @@ var YEM = YEM || {}; //Namespace
 
 
 					self.customer = new YEM.User();
-					
 					YEM.Cyril.listenTo('surname', self.saveNameAndGoFurther);
+					window.setTimeout(function(){
+						$('#instruction').toggleClass("fadein");
+						window.setTimeout(function(){
+							$('#instructionPrenom').toggleClass("fadein");
+						}, 1000)
+					}, 500)
 				};
 
 
