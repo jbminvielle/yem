@@ -30,6 +30,7 @@ var YEM = YEM || {}; //Namespace
 
 			YEM.Interface.ShowTemplate(null, 'veille', self.showNameScreen);
 
+			YEM.Feelanimations.init();
 
 
 			//dev
@@ -48,6 +49,8 @@ var YEM = YEM || {}; //Namespace
 
 
 					self.customer = new YEM.User();
+
+
 					YEM.Cyril.listenTo('surname', self.saveNameAndGoFurther);
 					window.setTimeout(function(){
 						$('#instruction').toggleClass("fadein");
