@@ -451,14 +451,23 @@ input{
 }
 
 /* ------------------------------------------------------------  
-			 PAGE 5 Transition/introduction au questionnaire  
+			 PAGE 5 questionnaire  
    ------------------------------------------------------------ */
+#question{
+
+	font-family: "AndradeSwashes";
+	font-size:2em;
+	text-align:center;
+	margin-top:60px;
+
+}
+
 
 #question_variable{
 	width: 635px;
 	height: 60px;
 	color: #fff;
-	font-family: HelveticaNeueLTCom-Roman;
+	font-family: "AndradeSwashes";
 	font-size: 12pt;
 	text-align: center;
 	margin: auto;
@@ -478,12 +487,13 @@ input{
 	width:250px;
 	height: 50px;
 	margin: 40px auto 0 auto;
-	border: solid #379cb5;
-	border-width: 1px 1px 1px 1px;
 	text-align: center;
-	font-family: HelveticaNeueLTCom-Roman;
+	font-family:"HelveticaNeueLTCom-LtCn";
+	color: #a1e8e0;
 	padding-top: 20px;
 	display: inline-block;
+	font-size: 1.5em;
+	font-weight:bold;
 }
 
 #reponse_groupe_gauche{
