@@ -2,6 +2,12 @@
 const WAITINGTIME = 3*1000;
 const FULLWAITINGTIME = 10*1000;
 
+const friendly = {
+	'Starter': 'Entrée',
+	'Main': 'Plat principal',
+	'Dessert': 'Dessert'
+}
+
 // $("#reponse").change(function(){
 //   //user.humeur = Webservice.kinect();
 //   //Interface.ShowTemplate(user, scan);
@@ -178,7 +184,7 @@ var YEM = YEM || {}; //Namespace
 						answerAnswered = self.customer.questionsAnswered[self.customer.activeQuestion].answers[i];
 
 						//show visually the answer which have been chosen
-						$('.encadrementQuestion[data-id='+answerAnswered.id+']').animate({'fontSize': 40}, 1000);
+						$('.encadrementQuestion:not([data-id='+answerAnswered.id+'])').animate({'opacity': .3}, 400);
 						break;
 					}
 			}
@@ -229,8 +235,10 @@ var YEM = YEM || {}; //Namespace
 				self.customer.currentMeat++;
 			}
 			while (self.customer.proposedMeats[self.customer.currentMeat].type != self.customer.currentType);
+
+			self.customer.proposedMeats[self.customer.currentMeat].friendlyType = window.friendly(self.customer.currentType);
 			
-			YEM.Interface.ShowTemplate(self.customer.proposedMeats[self.customer.currentMeat], 'resultat');
+			YEM.Interface.ShowTemplate(self.customer.proposedMeats[self.customer.currentMeat] , 'resultat');
 			YEM.Cyril.listenTo(null, self.analyseMeatAnswer);
 		},
 

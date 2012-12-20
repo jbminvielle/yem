@@ -557,6 +557,13 @@ svg {
 	font-size: 30px;
 }
 
+h2#meatType {
+	font-family: "AndradeSwashes";
+	font-size: 3em;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
 /* ------------------------------------------------------------  
 			 PAGE 7 FIN DE L EXPERIENCE  
    ------------------------------------------------------------ */
