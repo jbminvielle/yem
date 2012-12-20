@@ -29,15 +29,7 @@ var YEM = YEM || {}; //Namespace
 
 
 			YEM.Interface.ShowTemplate(null, 'veille', self.showNameScreen);
-
 			YEM.Feelanimations.init();
-
-
-			//dev
-			// self.customer = new YEM.User();
-			// self.customer.name = 'jbé';
-			// self.customer.id =  10;
-			// self.openQuestionForm(null);
 		},
 
 		// slide 1 : démarrage
@@ -46,7 +38,7 @@ var YEM = YEM || {}; //Namespace
 
 			$('#start').click(function() { //ou autre évènement qui lance le process
 				var templcallback = function(){
-
+					YEM.Feelanimations.resetAnim();
 
 					self.customer = new YEM.User();
 
@@ -184,6 +176,9 @@ var YEM = YEM || {}; //Namespace
 				for (i in self.customer.questionsAnswered[self.customer.activeQuestion].answers)
 					if(sortable[0][0] == self.customer.questionsAnswered[self.customer.activeQuestion].answers[i].id) {
 						answerAnswered = self.customer.questionsAnswered[self.customer.activeQuestion].answers[i];
+
+						//show visually the answer which have been chosen
+						//$('[data-id='+answerAnswered.id+']').animate({'font-size': 30}, 1000);
 						break;
 					}
 			}
@@ -194,31 +189,65 @@ var YEM = YEM || {}; //Namespace
 			YEM.Webservice.server('sendAnswer', {'user_id': self.customer.id,
 												'question_id': self.customer.activeQuestion,
 												'answer_id':  answerAnswered.id,
-												'questionsAlreadyAsked': self.customer.questionsAnsweredIds}, YEM.Main.analyseResponseFromSendAnswser);
+												'questionsAlreadyAsked': self.customer.questionsAnsweredIds}, function() {
+													setTimeout(function() {
+														self.analyseResponseFromSendAnswser();
+													}, WAITINGTIME);
+												});
 		},
 
 		analyseResponseFromSendAnswser: function(data){
 			if(data.status=="newQuestion") self.checkNewQuestion(data);
 			else //data = end
-				console.log(data.meats);
+				self.showResults(data.meats);
+			if(data.animation!=[]) self.renderAnimations(data);
+		},
+
+		renderAnimations: function(data) {
+			var animations = [];
+			for(i in data.feelings) {
+				animations.push(data.feelings[i].animation);
+			}
+			//not ready
+			//YEM.Feelanimations.render(animations);
 		},
 
 
 		// slide 6 : Résultat
 		showResults: function(meats) {
-			YEM.Interface.ShowTemplate(null, 'resultat');
+			self.customer.proposedMeats = meats;
+			self.customer.currentMeat = -1;
+			self.customer.validatedMeat = null;
 
-			$('#slider_plat img').click(function() {
-				self.saveMeat($(this).attr('data-id'));
-			});
+			self.whileShowResults();
 		},
 
+		whileShowResults: function() {
+			self.customer.currentMeat++;
+			YEM.Interface.ShowTemplate(self.customer.proposedMeats[self.customer.currentMeat], 'resultat');
+			YEM.Cyril.listenTo(null, self.analyseMeatAnswer);
+		},
+
+		analyseMeatAnswer: function(audioAnswer) {
+				var yes = YEM.Cyril.damerauLevenshteinDistance(audioAnswer, 'oui');
+				var no 	= YEM.Cyril.damerauLevenshteinDistance(audioAnswer, 'non');
+
+				if(no>yes) {
+					self.customer.validatedMeat = self.customer.proposedMeats[self.customer.currentMeat];
+					self.saveMeat();
+				}
+				else self.whileShowResults();
+
+			},
+
 		saveMeat: function () {
-			YEM.Webservice.server('sendAnswer', {'user_id': self.customer.id}, YEM.Main.showRecap);
-		}
+			YEM.Webservice.server('orderMeats', {'user_id': self.customer.id, 'meat_id': self.customer.validatedMeat.id}, YEM.Main.showRecap);
+		},
 
 		// slide 7 : Menu
-
+		showRecap: function () {
+			YEM.Interface.ShowTemplate({entree: self.customer.validatedMeat.name}, 'fin');
+		}
 
 	};
 

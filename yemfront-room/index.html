@@ -62,7 +62,7 @@
           <div class="cadreG"></div>
             <div id="phrasePrenom">
               
-              <span>Veuillez nous laisser enregistrer votre prénom vocalement...</span>
+              <span>Prennons un exemple, dites votre nom pour commencer</span>
               <input type="text" name="surname" id="speech_surname"></input>
             </div>
           <div class="cadreD">
@@ -142,14 +142,14 @@
       </script>
       <!-- PAGE 6  RESULTAT QUESTIONNAIRE -->
       <script id="template_resultat" type="text/template">
-        <div id="espace_video">
-        </div>
+       <h2 id="meatType">{{meatType}}</h2>
   
         <div id="slider_plat">
-          //<!-- img src=""> ?? -->
+          <h3>{{name}}</h3>
+          <p>{{description}}</p>
         </div>
       <div id="phrase_proposition">
-        VALIDEZ VOUS CE PLAT ?
+        Validez-vous ce plat ? (oui/non)
       </div>
 
       </script>  
@@ -159,14 +159,14 @@
       <script id="template_fin" type="text/template">  
          <div id="espace_menu">
           <div class="elmt_menu">ENTREE </div>
-          <div class="menu_variable">Maki de  jambon     et bulles de melon
+          <div class="menu_variable">{{entree}}
           </div>
         
           <div class="elmt_menu">PLAT </div>
-          <div class="menu_variable">Raviole de foie gras, émulsion à la truffe.
+          <div class="menu_variable">{{plat}}
           </div>
           <div class="elmt_menu">DESSERT </div>
-          <div class="menu_variable">Crumble à la pomme, Yahourt, Gingembre
+          <div class="menu_variable">{{dessert}}
           </div>
     </div>
 

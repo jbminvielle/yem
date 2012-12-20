@@ -10,7 +10,7 @@
 */
 
 require("conf_sql.php");
-define('NB_FEELINGS_REQUIRED', 6);
+define('NB_FEELINGS_REQUIRED',1);
 
 $data = $_REQUEST;
 unset($data['service']); // GTFO webservice name !
@@ -130,19 +130,18 @@ function action_orderMeats($request) {
 	// save stats for questions/feelings/plate : for one meat we will be able to know how user answered and feeld
 }
 
-
 //internal :
 
 function calculateFeelings($userId) {
 
 	$feelings = array();
 
-	$sqlData = mysql_query('SELECT F.id, F.name, A.characteristics FROM yem_feeling F, yem_animation A, yem_user_has_state US, yem_state_needs_feeling SF WHERE US.idUser='.$userId.' AND US.idState=SF.idState AND F.id=SF.idFeeling AND F.idAnimation=A.id');
+	$sqlData = mysql_query('SELECT F.id, F.name, A.characteristics AS animation FROM yem_feeling F, yem_animation A, yem_user_has_state US, yem_state_needs_feeling SF WHERE US.idUser='.$userId.' AND US.idState=SF.idState AND F.id=SF.idFeeling AND F.idAnimation=A.id');
 	while($r = mysql_fetch_assoc($sqlData)) {
 		array_push($feelings, array(
-			'id'=>$r['id'],
-			'name'=>mb_convert_encoding($r['name'], "UTF-8", "ASCII"),
-			'animation'=>json_decode($r['characteristics'])));
+			'id'=>			$r['id'],
+			'name'=> 		mb_convert_encoding($r['name'], "UTF-8", "ASCII"),
+			'animation'=>	json_decode($r['animation'])));
 	}
 	return $feelings;
 
@@ -168,6 +167,7 @@ function getMeats($feelings) {
 	while($r = mysql_fetch_assoc($sqlData)) {
 		$meats[$r['id']] = array(
 					'id'=> $r['id'],
+					'name'=> mb_convert_encoding($r['name'], "UTF-8", "ASCII"), 
 					'description'=> mb_convert_encoding($r['description'], "UTF-8", "ASCII"), 
 					'picture'=> mb_convert_encoding($r['picture'], "UTF-8", "ASCII"),
 					'price'=> mb_convert_encoding($r['price'], "UTF-8", "ASCII"),

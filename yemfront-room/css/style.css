@@ -176,9 +176,11 @@ input{
 
 #speechRecognition {
 	position: absolute;
-	top: -40px;
-	left: -430px;
+	bottom: 40px;
+	left: 30%;
+	width: 20%;
 	z-index: 2;
+	margin: 0; padding: 0;
 }
 
 #ghostClick {
@@ -537,8 +539,6 @@ svg {
 #slider_plat{
 	width: 300px;
 	height: 120px;
-	border: solid #bab8b8;
-	border-width: 1px 1px 1px 1px;
 	margin: 1% auto 0 auto;
 	color: #47b3ce;
 	font-family: HelveticaNeueLTCom-Bd;
@@ -551,6 +551,10 @@ svg {
 	font-family: HelveticaNeueLTCom-Bd;
 	margin: 1% auto 0 auto;
 	text-align: center;
+}
+
+#slider_plat h3 {
+	font-size: 30px;
 }
 
 /* ------------------------------------------------------------  

@@ -17,6 +17,9 @@ YEM.User= function() {
 	this.questionsAnswered = [];
 	this.questionsAnsweredIds = [];
 	this.states = [];
+	this.proposedMeats = [];
+	this.currentMeat = null;
+	this.validatedMeat = {};
 }
 
 YEM.User.prototype.getAnswer = function(){
