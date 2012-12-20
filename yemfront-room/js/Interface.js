@@ -24,7 +24,7 @@ Interface is mainly the interface with the templater Mustache
 
 YEM.Interface = new Object();
 
-YEM.Interface.ShowTemplate = function(jsonobj, template, templcallback ){
+YEM.Interface.ShowTemplate = function(jsonobj, template, templcallback){
 
 		var templ = $("#template_"+template).html();
 
@@ -38,7 +38,7 @@ YEM.Interface.ShowTemplate = function(jsonobj, template, templcallback ){
 			$('#screen').toggleClass("fadein");
 			window.setTimeout(function(){
 				$('#screen').toggleClass("fadein");
-				templcallback();
+				if(templcallback) templcallback();
 			}, 500)
 		}, 500)
 }

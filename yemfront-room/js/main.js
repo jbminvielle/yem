@@ -177,19 +177,19 @@ var YEM = YEM || {}; //Namespace
 				for (var distance in distances) sortable.push([distance, distances[distance]])
 				sortable.sort(function(a, b) {return a[1] - b[1]});
 
-				console.log(sortable)
 				//look for this answer :
 				for (i in self.customer.questionsAnswered[self.customer.activeQuestion].answers)
 					if(sortable[0][0] == self.customer.questionsAnswered[self.customer.activeQuestion].answers[i].id) {
 						answerAnswered = self.customer.questionsAnswered[self.customer.activeQuestion].answers[i];
 
-						//show visually the answer which have been chosen
-						$('.encadrementQuestion:not([data-id='+answerAnswered.id+'])').animate({'opacity': .3}, 400);
 						break;
 					}
 			}
 			//what we keeped :
 			console.log(answerAnswered);
+			
+			//show visually the answer which have been chosen
+			$('.encadrementQuestion:not([data-id='+answerAnswered.id+'])').animate({'opacity': .3}, 400);
 
 			//send this response
 			YEM.Webservice.server('sendAnswer', {'user_id': self.customer.id,
@@ -236,7 +236,7 @@ var YEM = YEM || {}; //Namespace
 			}
 			while (self.customer.proposedMeats[self.customer.currentMeat].type != self.customer.currentType);
 
-			self.customer.proposedMeats[self.customer.currentMeat].friendlyType = window.friendly(self.customer.currentType);
+			self.customer.proposedMeats[self.customer.currentMeat].friendlyType = window.friendly[self.customer.currentType];
 			
 			YEM.Interface.ShowTemplate(self.customer.proposedMeats[self.customer.currentMeat] , 'resultat');
 			YEM.Cyril.listenTo(null, self.analyseMeatAnswer);
