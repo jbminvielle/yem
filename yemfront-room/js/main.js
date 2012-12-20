@@ -178,7 +178,7 @@ var YEM = YEM || {}; //Namespace
 						answerAnswered = self.customer.questionsAnswered[self.customer.activeQuestion].answers[i];
 
 						//show visually the answer which have been chosen
-						//$('[data-id='+answerAnswered.id+']').animate({'font-size': 30}, 1000);
+						$('.encadrementQuestion[data-id='+answerAnswered.id+']').animate({'fontSize': 40}, 1000);
 						break;
 					}
 			}
@@ -189,9 +189,9 @@ var YEM = YEM || {}; //Namespace
 			YEM.Webservice.server('sendAnswer', {'user_id': self.customer.id,
 												'question_id': self.customer.activeQuestion,
 												'answer_id':  answerAnswered.id,
-												'questionsAlreadyAsked': self.customer.questionsAnsweredIds}, function() {
+												'questionsAlreadyAsked': self.customer.questionsAnsweredIds}, function(data) {
 													setTimeout(function() {
-														self.analyseResponseFromSendAnswser();
+														self.analyseResponseFromSendAnswser(data);
 													}, WAITINGTIME);
 												});
 		},
@@ -217,13 +217,19 @@ var YEM = YEM || {}; //Namespace
 		showResults: function(meats) {
 			self.customer.proposedMeats = meats;
 			self.customer.currentMeat = -1;
-			self.customer.validatedMeat = null;
+			self.customer.validatedMeats = [];
+			self.customer.currentType = 'Starter';
 
 			self.whileShowResults();
 		},
 
 		whileShowResults: function() {
-			self.customer.currentMeat++;
+			//we keep the 
+			do {
+				self.customer.currentMeat++;
+			}
+			while (self.customer.proposedMeats[self.customer.currentMeat].type != self.customer.currentType);
+			
 			YEM.Interface.ShowTemplate(self.customer.proposedMeats[self.customer.currentMeat], 'resultat');
 			YEM.Cyril.listenTo(null, self.analyseMeatAnswer);
 		},
@@ -233,7 +239,7 @@ var YEM = YEM || {}; //Namespace
 				var no 	= YEM.Cyril.damerauLevenshteinDistance(audioAnswer, 'non');
 
 				if(no>yes) {
-					self.customer.validatedMeat = self.customer.proposedMeats[self.customer.currentMeat];
+					self.customer.validatedMeats[self.customer.currentType] = self.customer.proposedMeats[self.customer.currentMeat];
 					self.saveMeat();
 				}
 				else self.whileShowResults();
@@ -241,12 +247,27 @@ var YEM = YEM || {}; //Namespace
 			},
 
 		saveMeat: function () {
-			YEM.Webservice.server('orderMeats', {'user_id': self.customer.id, 'meat_id': self.customer.validatedMeat.id}, YEM.Main.showRecap);
+			YEM.Webservice.server('orderMeats', {'user_id': self.customer.id, 'meat_id': self.customer.validatedMeats[self.customer.currentType].id}, YEM.Main.goNextMeatResult);
+		},
+
+		goNextMeatResult: function() {
+			//we have 
+			if(self.customer.currentType == 'Starter') self.customer.currentType = 'Main';
+			else if (self.customer.currentType == 'Main')  self.customer.currentType = 'Dessert';
+			else if(self.customer.currentType == 'Dessert') {
+				return self.showRecap();
+			}
+
+			//if it was not dessert, reset counter and relaunch screens
+			self.customer.currentMeat = -1;
+			self.whileShowResults();
 		},
 
 		// slide 7 : Menu
 		showRecap: function () {
-			YEM.Interface.ShowTemplate({entree: self.customer.validatedMeat.name}, 'fin');
+			YEM.Interface.ShowTemplate({starter: self.customer.validatedMeats.Starter.name,
+										main: self.customer.validatedMeats.Main.name,
+										dessert: self.customer.validatedMeats.Dessert.name}, 'fin');
 		}
 
 	};

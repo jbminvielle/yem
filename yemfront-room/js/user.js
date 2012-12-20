@@ -19,7 +19,8 @@ YEM.User= function() {
 	this.states = [];
 	this.proposedMeats = [];
 	this.currentMeat = null;
-	this.validatedMeat = {};
+	this.validatedMeats = [];
+	this.currentType = {};
 }
 
 YEM.User.prototype.getAnswer = function(){

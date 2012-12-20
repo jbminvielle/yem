@@ -133,7 +133,7 @@
 
         <div id="conteneur_Question">
            {{#answers}}
-           <div class="encadrementQuestion">
+           <div class="encadrementQuestion"  data-id="{{id}}">
               {{content}}
             </div>
            {{/answers}}              
@@ -142,7 +142,7 @@
       </script>
       <!-- PAGE 6  RESULTAT QUESTIONNAIRE -->
       <script id="template_resultat" type="text/template">
-       <h2 id="meatType">{{meatType}}</h2>
+       <h2 id="meatType">{{type}}</h2>
   
         <div id="slider_plat">
           <h3>{{name}}</h3>
@@ -159,11 +159,11 @@
       <script id="template_fin" type="text/template">  
          <div id="espace_menu">
           <div class="elmt_menu">ENTREE </div>
-          <div class="menu_variable">{{entree}}
+          <div class="menu_variable">{{starter}}
           </div>
         
           <div class="elmt_menu">PLAT </div>
-          <div class="menu_variable">{{plat}}
+          <div class="menu_variable">{{main}}
           </div>
           <div class="elmt_menu">DESSERT </div>
           <div class="menu_variable">{{dessert}}
@@ -173,7 +173,7 @@
     <div id="trait"></div>
   
       <div id="merci">
-        Merci d’avoir participé à l’expérience Yem.
+        Merci d’avoir participé à l’expérience Yem. Votre menu personalisé a été envoyé en cuisine.<br />
     Nous espérons que ce menu émotionnel vous donnera pleinement satisfaction. Votre serveur Jerôme vous attend pour vous
     conduire à votre table.      
       </div>
