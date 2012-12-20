@@ -555,6 +555,7 @@ svg {
 
 #slider_plat h3 {
 	font-size: 30px;
+	font-family: HelveticaNeueLTCom-LtCn;
 }
 
 h2#meatType {
@@ -622,7 +623,7 @@ h2#meatType {
 #phrase_proposition{
 	width: 250px;
 	font-family: HelveticaNeueLTCom-Bd;
-	margin: 1% auto 0 auto;
+	margin: 80px auto 0 auto;
 	text-align: center;
 }
 

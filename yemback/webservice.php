@@ -10,7 +10,7 @@
 */
 
 require("conf_sql.php");
-define('NB_FEELINGS_REQUIRED',12);
+define('NB_FEELINGS_REQUIRED',6);
 
 $data = $_REQUEST;
 unset($data['service']); // GTFO webservice name !

@@ -145,30 +145,30 @@ var YEM = YEM || {}; //Namespace
 			//log what we heard, for the lulz :
 			console.log(audioAnswer);
 
+			var double_metaphone_audio = double_metaphone(audioAnswer);
+			if(double_metaphone_audio.secondary == null) double_metaphone_audio.secondary =  double_metaphone_audio.primary;
+			console.log(double_metaphone_audio);
+
 			// for each possible answers
 			for(i in self.customer.questionsAnswered[self.customer.activeQuestion].answers) {
 				var r = self.customer.questionsAnswered[self.customer.activeQuestion].answers[i];
-
+				console.log(double_metaphone( r.content));
 				// Test 1 : if *equal* to answer
 				if(audioAnswer == r.content) {
 					answerAnswered = r;
 					break;
 				}
-				// Test 2 : test distance :
-				distances[r.id] = YEM.Cyril.damerauLevenshteinDistance(audioAnswer,r.content)
-
-				//var wordsAudio = audioAnswer.split(' ');
-
-				//for each word in Audio 
-				// for (i in wordsAudio) {
-				// 	//if in anwser waited :
-				// 	if (r.content.indexOf(wordsAudio[i])) {
-				// 		answerAnswered = r;
-				// 		alert('mach in '+audioAnswer);
-				// 		break;
-				// 	}
-				// }
-				// if(answerAnswered != null) break;
+				// Test 2 : tests distance :
+				//normal
+				var d1 = YEM.Cyril.damerauLevenshteinDistance(audioAnswer,r.content)
+				//double_metaphone
+				var metaphone_r = double_metaphone(r.content);
+				if(metaphone_r.secondary == null) metaphone_r.secondary = metaphone_r.primary;
+				var d2 = YEM.Cyril.damerauLevenshteinDistance(double_metaphone_audio.primary,double_metaphone(r.content).primary)
+				//double_metaphone_second
+				var d3 = YEM.Cyril.damerauLevenshteinDistance(double_metaphone_audio.secondary,double_metaphone(r.content).secondary)
+				//moyenne 
+				distances[r.id] = (d1+d2+d3)/3;
 			}
 			//to understand if it failed :
 			console.log(distances);
